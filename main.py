@@ -17,7 +17,7 @@ red = (255, 0, 0)
 blue = (0, 0, 255)
 green = (0, 255, 0)
 purple = (255, 0, 255)
-orange = (255, 255, 0)
+orange = (255, 140, 0)
 
 class Tetrimino():
     def __init__(self, name):
