@@ -84,6 +84,11 @@ tetriminos = (
     )).setColor(red),
 )
 
+clearer = pygame.Rect(0, 0, 48, 48)
+
+# iter through tetriminos
+elements = iter(tetriminos)
+
 running = True
 while running:
     for event in pygame.event.get():
@@ -92,5 +97,21 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key in (pygame.K_ESCAPE, pygame.K_q):
                 running = False
+
+    # select next tetrimino
+    try:
+        tetrimino = next(elements)
+    except StopIteration:
+        elements = iter(tetriminos)
+        tetrimino = next(elements)
+    #clear screen
+    pygame.draw.rect(screen, black, clearer)
+    # then draw it
+    for rect in tetrimino.blocks:
+        pygame.draw.rect(screen, tetrimino.color, rect, 1)
+    pygame.display.update()
+    # wait a second
+    pygame.time.wait(1000)
+
 
 print("Exiting game")
