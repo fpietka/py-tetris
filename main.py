@@ -9,6 +9,8 @@ mode = modes[-1]
 # Running in smallest mode
 screen = pygame.display.set_mode(mode)
 
+black = (0, 0, 0)
+white = (255, 255, 255)
 yellow = (255, 255, 0)
 cyan = (0, 255, 255)
 red = (255, 0, 0)
@@ -21,7 +23,7 @@ class Tetrimino():
     def __init__(self, name):
         self.name = name
         self.blocks = list()
-        self.color = (255, 255, 255)
+        self.color = white
 
     def setBlocks(self, blocks):
         self.blocks = blocks
