@@ -103,6 +103,7 @@ while running:
     try:
         tetrimino = next(elements)
     except StopIteration:
+        # reset iterable
         elements = iter(tetriminos)
         tetrimino = next(elements)
     #clear screen
