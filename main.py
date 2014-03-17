@@ -26,6 +26,7 @@ class Tetrimino(pygame.sprite.Group):
         self.name = name
         self.blocks = list()
         self.color = color
+        self.outline = 1
 
     def setBlocks(self, blocks):
         self.blocks = blocks
@@ -33,7 +34,7 @@ class Tetrimino(pygame.sprite.Group):
         block = blocks[0].copy()
         block.top, block.left = 0, 0
         image = pygame.Surface(block.size)
-        pygame.draw.rect(image, self.color, block, 1)
+        pygame.draw.rect(image, self.color, block, self.outline)
         for block in blocks:
             sprite = pygame.sprite.Sprite()
             sprite.rect = block
