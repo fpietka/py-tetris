@@ -37,6 +37,7 @@ class Tetrimino(pygame.sprite.Group):
         self.blocks = list()
         self.color = color
         self.outline = 1
+        self.direction = D_UP
 
     def setBlocks(self, blocks):
         """Build sprites group"""
