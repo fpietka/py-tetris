@@ -19,6 +19,16 @@ green = (0, 255, 0)
 purple = (255, 0, 255)
 orange = (255, 140, 0)
 
+D_UP = 0
+D_RIGHT = 1
+D_DOWN = 2
+D_LEFT = 3
+directions = (D_UP, D_RIGHT, D_DOWN, D_LEFT)
+
+M_CW = 0
+M_CCW = 1
+motions = (M_CW, M_CCW)
+
 
 class Tetrimino(pygame.sprite.Group):
     def __init__(self, name, color=white):
