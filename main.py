@@ -21,10 +21,10 @@ orange = (255, 140, 0)
 
 
 class Tetrimino():
-    def __init__(self, name):
+    def __init__(self, name, color=white):
         self.name = name
         self.blocks = list()
-        self.color = white
+        self.color = color
 
     def setBlocks(self, blocks):
         self.blocks = blocks
@@ -35,54 +35,54 @@ class Tetrimino():
         return self
 
 tetriminos = (
-    Tetrimino('O').setBlocks((
+    Tetrimino('O', yellow).setBlocks((
         pygame.Rect(0, 0, 10, 10),
         pygame.Rect(12, 0, 10, 10),
         pygame.Rect(12, 12, 10, 10),
         pygame.Rect(0, 12, 10, 10)
-    )).setColor(yellow),
+    )),
 
-    Tetrimino('I').setBlocks((
+    Tetrimino('I', cyan).setBlocks((
         pygame.Rect(0, 0, 10, 10),
         pygame.Rect(12, 0, 10, 10),
         pygame.Rect(24, 0, 10, 10),
         pygame.Rect(36, 0, 10, 10)
-    )).setColor(cyan),
+    )),
 
-    Tetrimino('J').setBlocks((
+    Tetrimino('J', blue).setBlocks((
         pygame.Rect(0, 0, 10, 10),
         pygame.Rect(0, 12, 10, 10),
         pygame.Rect(12, 12, 10, 10),
         pygame.Rect(24, 12, 10, 10)
-    )).setColor(blue),
+    )),
 
-    Tetrimino('L').setBlocks((
+    Tetrimino('L', orange).setBlocks((
         pygame.Rect(0, 12, 10, 10),
         pygame.Rect(12, 12, 10, 10),
         pygame.Rect(24, 12, 10, 10),
         pygame.Rect(24, 0, 10, 10)
-    )).setColor(orange),
+    )),
 
-    Tetrimino('S').setBlocks((
+    Tetrimino('S', green).setBlocks((
         pygame.Rect(0, 12, 10, 10),
         pygame.Rect(12, 0, 10, 10),
         pygame.Rect(12, 12, 10, 10),
         pygame.Rect(24, 0, 10, 10)
-    )).setColor(green),
+    )),
 
-    Tetrimino('T').setBlocks((
+    Tetrimino('T', purple).setBlocks((
         pygame.Rect(0, 12, 10, 10),
         pygame.Rect(12, 0, 10, 10),
         pygame.Rect(12, 12, 10, 10),
         pygame.Rect(24, 12, 10, 10)
-    )).setColor(purple),
+    )),
 
-    Tetrimino('Z').setBlocks((
+    Tetrimino('Z', red).setBlocks((
         pygame.Rect(0, 0, 10, 10),
         pygame.Rect(12, 0, 10, 10),
         pygame.Rect(12, 12, 10, 10),
         pygame.Rect(24, 12, 10, 10)
-    )).setColor(red),
+    )),
 )
 
 clearer = pygame.Rect(0, 0, 48, 48)
