@@ -20,14 +20,25 @@ purple = (255, 0, 255)
 orange = (255, 140, 0)
 
 
-class Tetrimino():
+class Tetrimino(pygame.sprite.Group):
     def __init__(self, name, color=white):
+        super(Tetrimino, self).__init__()
         self.name = name
         self.blocks = list()
         self.color = color
 
     def setBlocks(self, blocks):
         self.blocks = blocks
+        # use first block to draw an image
+        block = blocks[0].copy()
+        block.top, block.left = 0, 0
+        image = pygame.Surface(block.size)
+        pygame.draw.rect(image, self.color, block, 1)
+        for block in blocks:
+            sprite = pygame.sprite.Sprite()
+            sprite.rect = block
+            sprite.image = image
+            sprite.add(self)
         return self
 
     def setColor(self, color):
@@ -109,8 +120,7 @@ while running:
     #clear screen
     pygame.draw.rect(screen, black, clearer)
     # then draw it
-    for rect in tetrimino.blocks:
-        pygame.draw.rect(screen, tetrimino.color, rect, 1)
+    tetrimino.draw(screen)
     pygame.display.update()
     # wait a second
     pygame.time.wait(1000)
