@@ -29,6 +29,7 @@ class Tetrimino(pygame.sprite.Group):
         self.outline = 1
 
     def setBlocks(self, blocks):
+        """Build sprites group"""
         self.blocks = blocks
         # use first block to draw an image
         block = blocks[0].copy()
@@ -43,6 +44,7 @@ class Tetrimino(pygame.sprite.Group):
         return self
 
     def setColor(self, color):
+        """Set the color of the sprites"""
         self.color = color
         return self
 
