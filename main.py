@@ -35,7 +35,7 @@ class Tetrimino(pygame.sprite.Group):
         super(Tetrimino, self).__init__()
         self.name = name
         self.blocks = list()
-        self.color = color
+        self.setColor(color)
         self.outline = 1
         self.direction = D_UP
 
