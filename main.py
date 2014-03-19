@@ -29,6 +29,16 @@ M_CW = 0
 M_CCW = 1
 motions = (M_CW, M_CCW)
 
+Z_WIDTH, Z_HEIGHT = screen.get_size()
+Z_WIDTH = Z_HEIGHT / 2
+
+zone = pygame.Surface((Z_WIDTH, Z_HEIGHT))
+pygame.draw.rect(zone, white, zone.get_rect(), 1)
+
+Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
+
+screen.blit(zone, (Z_LEFT, 0))
+
 
 class Tetrimino(pygame.sprite.Group):
     def __init__(self, name, color=white):
@@ -111,16 +121,6 @@ tetriminos = (
 )
 
 clearer = pygame.Rect(0, 0, 48, 48)
-
-Z_WIDTH, Z_HEIGHT = screen.get_size()
-Z_WIDTH = Z_HEIGHT / 2
-
-zone = pygame.Surface((Z_WIDTH, Z_HEIGHT))
-pygame.draw.rect(zone, white, zone.get_rect(), 1)
-
-Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
-
-screen.blit(zone, (Z_LEFT, 0))
 
 # iter through tetriminos
 elements = iter(tetriminos)
