@@ -32,6 +32,8 @@ motions = (M_CW, M_CCW)
 Z_WIDTH, Z_HEIGHT = screen.get_size()
 Z_WIDTH = Z_HEIGHT / 2
 
+B_SIZE = (Z_WIDTH - 11) / 10
+
 zone = pygame.Surface((Z_WIDTH, Z_HEIGHT))
 pygame.draw.rect(zone, white, zone.get_rect(), 1)
 
@@ -71,52 +73,52 @@ class Tetrimino(pygame.sprite.Group):
 
 tetriminos = (
     Tetrimino('O', yellow).setBlocks((
-        pygame.Rect(0, 0, 10, 10),
-        pygame.Rect(12, 0, 10, 10),
-        pygame.Rect(12, 12, 10, 10),
-        pygame.Rect(0, 12, 10, 10)
+        pygame.Rect(0, 0, B_SIZE, B_SIZE),
+        pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
+        pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+        pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE)
     )),
 
     Tetrimino('I', cyan).setBlocks((
-        pygame.Rect(0, 0, 10, 10),
-        pygame.Rect(12, 0, 10, 10),
-        pygame.Rect(24, 0, 10, 10),
-        pygame.Rect(36, 0, 10, 10)
+        pygame.Rect(0, 0, B_SIZE, B_SIZE),
+        pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
+        pygame.Rect((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE),
+        pygame.Rect((B_SIZE + 2) * 3, 0, B_SIZE, B_SIZE)
     )),
 
     Tetrimino('J', blue).setBlocks((
-        pygame.Rect(0, 0, 10, 10),
-        pygame.Rect(0, 12, 10, 10),
-        pygame.Rect(12, 12, 10, 10),
-        pygame.Rect(24, 12, 10, 10)
+        pygame.Rect(0, 0, B_SIZE, B_SIZE),
+        pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
+        pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+        pygame.Rect((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
     )),
 
     Tetrimino('L', orange).setBlocks((
-        pygame.Rect(0, 12, 10, 10),
-        pygame.Rect(12, 12, 10, 10),
-        pygame.Rect(24, 12, 10, 10),
-        pygame.Rect(24, 0, 10, 10)
+        pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
+        pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+        pygame.Rect((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE),
+        pygame.Rect((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE)
     )),
 
     Tetrimino('S', green).setBlocks((
-        pygame.Rect(0, 12, 10, 10),
-        pygame.Rect(12, 0, 10, 10),
-        pygame.Rect(12, 12, 10, 10),
-        pygame.Rect(24, 0, 10, 10)
+        pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
+        pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
+        pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+        pygame.Rect((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE)
     )),
 
     Tetrimino('T', purple).setBlocks((
-        pygame.Rect(0, 12, 10, 10),
-        pygame.Rect(12, 0, 10, 10),
-        pygame.Rect(12, 12, 10, 10),
-        pygame.Rect(24, 12, 10, 10)
+        pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
+        pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
+        pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+        pygame.Rect((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
     )),
 
     Tetrimino('Z', red).setBlocks((
-        pygame.Rect(0, 0, 10, 10),
-        pygame.Rect(12, 0, 10, 10),
-        pygame.Rect(12, 12, 10, 10),
-        pygame.Rect(24, 12, 10, 10)
+        pygame.Rect(0, 0, B_SIZE, B_SIZE),
+        pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
+        pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+        pygame.Rect((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
     )),
 )
 
