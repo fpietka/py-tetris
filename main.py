@@ -122,7 +122,7 @@ tetriminos = (
     )),
 )
 
-clearer = pygame.Rect(0, 0, 48, 48)
+clearer = pygame.Rect(0, 0, (B_SIZE + 2) * 4, (B_SIZE + 2) * 4)
 
 # iter through tetriminos
 elements = iter(tetriminos)
