@@ -43,13 +43,16 @@ screen.blit(zone, (Z_LEFT, 0))
 
 
 class Tetrimino(pygame.sprite.Group):
-    def __init__(self, name, color=white):
+    def __init__(self, *args):
         super(Tetrimino, self).__init__()
-        self.name = name
         self.blocks = list()
-        self.setColor(color)
+        self.color = white
         self.outline = 1
         self.direction = D_UP
+
+    def setName(self, name):
+        self.name = name
+        return self
 
     def setBlocks(self, blocks):
         """Build sprites group"""
@@ -71,50 +74,51 @@ class Tetrimino(pygame.sprite.Group):
         self.color = color
         return self
 
+
 tetriminos = (
-    Tetrimino('O', yellow).setBlocks((
+    Tetrimino().setName('O').setColor(yellow).setBlocks((
         pygame.Rect(0, 0, B_SIZE, B_SIZE),
         pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
         pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
         pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE)
     )),
 
-    Tetrimino('I', cyan).setBlocks((
+    Tetrimino().setName('I').setColor(cyan).setBlocks((
         pygame.Rect(0, 0, B_SIZE, B_SIZE),
         pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
         pygame.Rect((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE),
         pygame.Rect((B_SIZE + 2) * 3, 0, B_SIZE, B_SIZE)
     )),
 
-    Tetrimino('J', blue).setBlocks((
+    Tetrimino().setName('J').setColor(blue).setBlocks((
         pygame.Rect(0, 0, B_SIZE, B_SIZE),
         pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
         pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
         pygame.Rect((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
     )),
 
-    Tetrimino('L', orange).setBlocks((
+    Tetrimino().setName('L').setColor(orange).setBlocks((
         pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
         pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
         pygame.Rect((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE),
         pygame.Rect((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE)
     )),
 
-    Tetrimino('S', green).setBlocks((
+    Tetrimino().setName('S').setColor(green).setBlocks((
         pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
         pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
         pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
         pygame.Rect((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE)
     )),
 
-    Tetrimino('T', purple).setBlocks((
+    Tetrimino().setName('T').setColor(purple).setBlocks((
         pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
         pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
         pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
         pygame.Rect((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
     )),
 
-    Tetrimino('Z', red).setBlocks((
+    Tetrimino().setName('Z').setColor(red).setBlocks((
         pygame.Rect(0, 0, B_SIZE, B_SIZE),
         pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
         pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
