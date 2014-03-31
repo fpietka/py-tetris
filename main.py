@@ -161,6 +161,8 @@ for definition in tetriminos_definitions:
     tetriminos.append(Tetrimino(definition))
 
 
+L = Tetrimino(definition[2])
+
 clearer = pygame.Rect(0, 0, (B_SIZE + 2) * 4, (B_SIZE + 2) * 4)
 
 # iter through tetriminos
