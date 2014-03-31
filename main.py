@@ -161,7 +161,7 @@ for definition in tetriminos_definitions:
     tetriminos.append(Tetrimino(definition))
 
 
-L = Tetrimino(definition[2])
+L = Tetrimino(tetriminos_definitions[2])
 
 clearer = pygame.Rect(0, 0, (B_SIZE + 2) * 4, (B_SIZE + 2) * 4)
 
