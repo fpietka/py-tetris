@@ -78,6 +78,9 @@ class Tetrimino(pygame.sprite.Group):
         self.color = color
         return self
 
+    def moveDown(self):
+        for sprite in sprites:
+            sprite.top += B_SIZE
 
 
 tetriminos_definitions = (
