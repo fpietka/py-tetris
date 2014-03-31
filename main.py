@@ -62,13 +62,13 @@ class Tetrimino(pygame.sprite.Group):
         """Build sprites group"""
         self.blocks = blocks
         # use first block to draw an image
-        block = blocks[0].copy()
+        block = pygame.Rect(blocks[0])
         block.top, block.left = 0, 0
         image = pygame.Surface(block.size)
         pygame.draw.rect(image, self.color, block, self.outline)
         for block in blocks:
             sprite = pygame.sprite.Sprite()
-            sprite.rect = block
+            sprite.rect = pygame.Rect(block)
             sprite.image = image
             sprite.add(self)
         return self
@@ -88,70 +88,70 @@ tetriminos_definitions = (
         'name': 'O',
         'color': yellow,
         'blocks': (
-            pygame.Rect(0, 0, B_SIZE, B_SIZE),
-            pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
-            pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE)
+            (0, 0, B_SIZE, B_SIZE),
+            (B_SIZE + 2, 0, B_SIZE, B_SIZE),
+            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+            (0, B_SIZE + 2, B_SIZE, B_SIZE)
         )
     },
     {
         'name': 'I',
         'color': cyan,
         'blocks': (
-            pygame.Rect(0, 0, B_SIZE, B_SIZE),
-            pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
-            pygame.Rect((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE),
-            pygame.Rect((B_SIZE + 2) * 3, 0, B_SIZE, B_SIZE)
+            (0, 0, B_SIZE, B_SIZE),
+            (B_SIZE + 2, 0, B_SIZE, B_SIZE),
+            ((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE),
+            ((B_SIZE + 2) * 3, 0, B_SIZE, B_SIZE)
         )
     },
     {
         'name': 'J',
         'color': blue,
         'blocks': (
-            pygame.Rect(0, 0, B_SIZE, B_SIZE),
-            pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
-            pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            pygame.Rect((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
+            (0, 0, B_SIZE, B_SIZE),
+            (0, B_SIZE + 2, B_SIZE, B_SIZE),
+            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+            ((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
         )
     },
     {
         'name': 'L',
         'color': orange,
         'blocks': (
-            pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
-            pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            pygame.Rect((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            pygame.Rect((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE)
+            (0, B_SIZE + 2, B_SIZE, B_SIZE),
+            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+            ((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE),
+            ((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE)
         )
     },
     {
         'name': 'S',
         'color': green,
         'blocks': (
-            pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
-            pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
-            pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            pygame.Rect((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE)
+            (0, B_SIZE + 2, B_SIZE, B_SIZE),
+            (B_SIZE + 2, 0, B_SIZE, B_SIZE),
+            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+            ((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE)
         )
     },
     {
         'name': 'T',
         'color': purple,
         'blocks': (
-            pygame.Rect(0, B_SIZE + 2, B_SIZE, B_SIZE),
-            pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
-            pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            pygame.Rect((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
+            (0, B_SIZE + 2, B_SIZE, B_SIZE),
+            (B_SIZE + 2, 0, B_SIZE, B_SIZE),
+            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+            ((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
         )
     },
     {
         'name': 'Z',
         'color': red,
         'blocks': (
-            pygame.Rect(0, 0, B_SIZE, B_SIZE),
-            pygame.Rect(B_SIZE + 2, 0, B_SIZE, B_SIZE),
-            pygame.Rect(B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            pygame.Rect((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
+            (0, 0, B_SIZE, B_SIZE),
+            (B_SIZE + 2, 0, B_SIZE, B_SIZE),
+            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
+            ((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
         )
     },
 )
