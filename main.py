@@ -81,14 +81,14 @@ class Tetrimino(pygame.sprite.Group):
         return self
 
     def moveDown(self):
+        for sprite in self.sprites():
+            sprite.rect.top += B_SIZE +2
+        return self
+
+    def isColliding(self):
         bottom = max(sprite.rect.bottom for sprite in self.sprites())
-        # XXX Need to test colisions too
-        if bottom + B_SIZE < mode[1]:
-            for sprite in self.sprites():
-                sprite.rect.top += B_SIZE +2
+        if bottom > mode[1]:
             return True
-        else:
-            return False
 
     def center(self, width):
         groupwidth = max(sprite.rect.right for sprite in self.sprites())
