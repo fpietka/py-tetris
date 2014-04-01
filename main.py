@@ -213,6 +213,7 @@ while running:
     if L.isColliding():
         zone_sprites_groups.append(L)
         L = Tetrimino(random.choice(tetriminos_definitions))
+        L.center(Z_WIDTH)
     else:
         L.clear(zone, screen)
         L.draw(zone)
