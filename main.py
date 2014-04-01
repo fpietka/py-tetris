@@ -88,6 +88,11 @@ class Tetrimino(pygame.sprite.Group):
         else:
             return False
 
+    def center(self, width):
+        groupwidth = max(sprite.rect.right for sprite in self.sprites())
+        for sprite in self.sprites():
+            sprite.rect.left += (width / 2) - (groupwidth / 2)
+
 tetriminos_definitions = (
     {
         'name': 'O',
@@ -167,6 +172,7 @@ for definition in tetriminos_definitions:
 
 
 L = Tetrimino(tetriminos_definitions[2])
+L.center(Z_WIDTH)
 
 clearer = pygame.Rect(0, 0, (B_SIZE + 2) * 4, (B_SIZE + 2) * 4)
 
