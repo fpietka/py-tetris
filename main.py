@@ -79,9 +79,14 @@ class Tetrimino(pygame.sprite.Group):
         return self
 
     def moveDown(self):
-        for sprite in sprites:
-            sprite.top += B_SIZE
-
+        bottom = max(sprite.rect.bottom for sprite in self.sprites())
+        # XXX Need to test colisions too
+        if bottom + B_SIZE < mode[1]:
+            for sprite in self.sprites():
+                sprite.rect.top += B_SIZE +2
+            return True
+        else:
+            return False
 
 tetriminos_definitions = (
     {
@@ -188,6 +193,12 @@ while running:
     pygame.draw.rect(screen, black, clearer)
     # then draw it
     tetrimino.draw(screen)
+
+    L.clear(zone, screen)
+    L.moveDown()
+    L.draw(zone)
+    screen.blit(zone, (Z_LEFT, 0))
+
     pygame.display.update()
     # wait a second
     pygame.time.wait(1000)
