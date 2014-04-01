@@ -43,7 +43,7 @@ Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
 
 screen.blit(zone, (Z_LEFT, 0))
 
-F_TIME = 1000
+F_TIME = 500
 
 
 class Tetrimino(pygame.sprite.Group):
