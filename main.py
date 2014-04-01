@@ -88,6 +88,10 @@ class Tetrimino(pygame.sprite.Group):
         return self
 
     def isColliding(self):
+        # Test collisions
+        for group in zone_sprites_groups:
+            if pygame.sprite.groupcollide(group, self, False, False):
+                return True
         bottom = max(sprite.rect.bottom for sprite in self.sprites())
         if bottom > mode[1]:
             return True
