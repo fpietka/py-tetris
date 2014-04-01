@@ -178,6 +178,10 @@ for definition in tetriminos_definitions:
 
 L = Tetrimino(tetriminos_definitions[2])
 L.center(Z_WIDTH)
+L.draw(zone)
+screen.blit(zone, (Z_LEFT, 0))
+pygame.display.update()
+pygame.time.wait(F_TIME)
 
 clearer = pygame.Rect(0, 0, (B_SIZE + 2) * 4, (B_SIZE + 2) * 4)
 
