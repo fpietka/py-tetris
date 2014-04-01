@@ -87,6 +87,11 @@ class Tetrimino(pygame.sprite.Group):
             sprite.rect.top += B_SIZE +2
         return self
 
+    def moveUp(self):
+        for sprite in self.sprites():
+            sprite.rect.top -= B_SIZE +2
+        return self
+
     def isColliding(self):
         # Test collisions
         for group in zone_sprites_groups:
@@ -215,6 +220,7 @@ while running:
 
     L.moveDown()
     if L.isColliding():
+        L.moveUp()
         zone_sprites_groups.append(L)
         L = Tetrimino(random.choice(tetriminos_definitions))
         L.center(Z_WIDTH)
