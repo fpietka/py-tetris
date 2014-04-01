@@ -96,6 +96,7 @@ class Tetrimino(pygame.sprite.Group):
         groupwidth = max(sprite.rect.right for sprite in self.sprites())
         for sprite in self.sprites():
             sprite.rect.left += (width / 2) - (groupwidth / 2)
+        return self
 
 tetriminos_definitions = (
     {
