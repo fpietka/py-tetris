@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import pygame
+import random
 
 pygame.init()
 
@@ -35,6 +36,7 @@ Z_WIDTH = Z_HEIGHT / 2
 B_SIZE = (Z_WIDTH - 11) / 10
 
 zone = pygame.Surface((Z_WIDTH, Z_HEIGHT))
+zone_sprites_groups = list()
 pygame.draw.rect(zone, white, zone.get_rect(), 1)
 
 Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
@@ -202,9 +204,13 @@ while running:
     # then draw it
     tetrimino.draw(screen)
 
-    L.clear(zone, screen)
     L.moveDown()
-    L.draw(zone)
+    if L.isColliding():
+        zone_sprites_groups.append(L)
+        L = Tetrimino(random.choice(tetriminos_definitions))
+    else:
+        L.clear(zone, screen)
+        L.draw(zone)
     screen.blit(zone, (Z_LEFT, 0))
 
     pygame.display.update()
