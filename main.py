@@ -41,6 +41,8 @@ Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
 
 screen.blit(zone, (Z_LEFT, 0))
 
+F_TIME = 1000
+
 
 class Tetrimino(pygame.sprite.Group):
     def __init__(self, definition):
@@ -207,7 +209,7 @@ while running:
 
     pygame.display.update()
     # wait a second
-    pygame.time.wait(1000)
+    pygame.time.wait(F_TIME)
 
 
 print("Exiting game")
