@@ -3,6 +3,8 @@
 import pygame
 import random
 
+from lib.tetrimino import Tetrimino
+
 pygame.init()
 
 modes = pygame.display.list_modes()
@@ -45,67 +47,6 @@ screen.blit(zone, (Z_LEFT, 0))
 
 F_TIME = 500
 
-
-class Tetrimino(pygame.sprite.Group):
-    def __init__(self, definition):
-        super(Tetrimino, self).__init__()
-        self.blocks = list()
-        self.color = white
-        self.outline = 1
-        self.direction = D_UP
-        # XXX maybe have 3 seperate parameters in init
-        self.setName(definition['name'])
-        self.setColor(definition['color'])
-        self.setBlocks(definition['blocks'])
-
-    def setName(self, name):
-        self.name = name
-        return self
-
-    def setBlocks(self, blocks):
-        """Build sprites group"""
-        self.blocks = blocks
-        # use first block to draw an image
-        block = pygame.Rect(blocks[0])
-        block.top, block.left = 0, 0
-        image = pygame.Surface(block.size)
-        pygame.draw.rect(image, self.color, block, self.outline)
-        for block in blocks:
-            sprite = pygame.sprite.Sprite()
-            sprite.rect = pygame.Rect(block)
-            sprite.image = image
-            sprite.add(self)
-        return self
-
-    def setColor(self, color):
-        """Set the color of the sprites"""
-        self.color = color
-        return self
-
-    def moveDown(self):
-        for sprite in self.sprites():
-            sprite.rect.top += B_SIZE +2
-        return self
-
-    def moveUp(self):
-        for sprite in self.sprites():
-            sprite.rect.top -= B_SIZE +2
-        return self
-
-    def isColliding(self):
-        # Test collisions
-        for group in zone_sprites_groups:
-            if pygame.sprite.groupcollide(group, self, False, False):
-                return True
-        bottom = max(sprite.rect.bottom for sprite in self.sprites())
-        if bottom > mode[1]:
-            return True
-
-    def center(self, width):
-        groupwidth = max(sprite.rect.right for sprite in self.sprites())
-        for sprite in self.sprites():
-            sprite.rect.left += (width / 2) - (groupwidth / 2)
-        return self
 
 tetriminos_definitions = (
     {
@@ -182,10 +123,10 @@ tetriminos_definitions = (
 
 tetriminos = list()
 for definition in tetriminos_definitions:
-    tetriminos.append(Tetrimino(definition))
+    tetriminos.append(Tetrimino(definition, B_SIZE))
 
 
-L = Tetrimino(tetriminos_definitions[2])
+L = Tetrimino(tetriminos_definitions[2], B_SIZE)
 L.center(Z_WIDTH)
 L.draw(zone)
 screen.blit(zone, (Z_LEFT, 0))
@@ -219,10 +160,10 @@ while running:
     tetrimino.draw(screen)
 
     L.moveDown()
-    if L.isColliding():
+    if L.isColliding(zone_sprites_groups, mode[1]):
         L.moveUp()
         zone_sprites_groups.append(L)
-        L = Tetrimino(random.choice(tetriminos_definitions))
+        L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE)
         L.center(Z_WIDTH)
         L.draw(zone)
     else:
