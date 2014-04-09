@@ -150,14 +150,14 @@ while running:
                 running = False
             if event.key == pygame.K_LEFT:
                 L.moveLeft()
-                if L.isColliding(zone_sprites_groups, mode[1], 0, mode[0]):
+                if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
                     L.moveRight()
                 else:
                     L.clear(zone, screen)
                     L.draw(zone)
             if event.key == pygame.K_RIGHT:
                 L.moveRight()
-                if L.isColliding(zone_sprites_groups, mode[1], 0, mode[0]):
+                if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
                     L.moveLeft()
                 else:
                     L.clear(zone, screen)
@@ -177,7 +177,7 @@ while running:
             tetrimino.draw(screen)
 
             L.moveDown()
-            if L.isColliding(zone_sprites_groups, mode[1], 0, mode[0]):
+            if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
                 L.moveUp()
                 zone_sprites_groups.append(L)
                 L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE)
