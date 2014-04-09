@@ -5,6 +5,7 @@ white = (255, 255, 255)
 
 D_UP = 0
 
+
 class Tetrimino(pygame.sprite.Group):
     def __init__(self, definition, size):
         super(Tetrimino, self).__init__()
@@ -12,7 +13,7 @@ class Tetrimino(pygame.sprite.Group):
         self.color = white
         self.outline = 1
         self.direction = D_UP
-        # XXX maybe have 3 seperate parameters in init
+        # XXX maybe have 3 separate parameters in init
         self.setName(definition['name'])
         self.setColor(definition['color'])
         self.setBlocks(definition['blocks'])
