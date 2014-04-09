@@ -62,13 +62,19 @@ class Tetrimino(pygame.sprite.Group):
             sprite.rect.left += self.size +2
         return self
 
-    def isColliding(self, zone_sprites_groups, zone_bottom):
+    def isColliding(self, zone_sprites_groups, zone_bottom, zone_left, zone_right):
         # Test collisions
         for group in zone_sprites_groups:
             if pygame.sprite.groupcollide(group, self, False, False):
                 return True
         bottom = max(sprite.rect.bottom for sprite in self.sprites())
         if bottom > zone_bottom:
+            return True
+        left = min(sprite.rect.left for sprite in self.sprites())
+        if left < zone_left:
+            return True
+        right = max(sprite.rect.right for sprite in self.sprites())
+        if right > zone_right:
             return True
 
     def center(self, width):
