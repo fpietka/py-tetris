@@ -131,7 +131,9 @@ L.center(Z_WIDTH)
 L.draw(zone)
 screen.blit(zone, (Z_LEFT, 0))
 pygame.display.update()
-pygame.time.wait(F_TIME)
+
+FALLEVENT = pygame.USEREVENT + 1
+pygame.time.set_timer(FALLEVENT, F_TIME)
 
 clearer = pygame.Rect(0, 0, (B_SIZE + 2) * 4, (B_SIZE + 2) * 4)
 
@@ -147,33 +149,31 @@ while running:
             if event.key in (pygame.K_ESCAPE, pygame.K_q):
                 running = False
 
-    # select next tetrimino
-    try:
-        tetrimino = next(elements)
-    except StopIteration:
-        # reset iterable
-        elements = iter(tetriminos)
-        tetrimino = next(elements)
-    #clear screen
-    pygame.draw.rect(screen, black, clearer)
-    # then draw it
-    tetrimino.draw(screen)
+        if event.type == FALLEVENT:
+            # select next tetrimino
+            try:
+                tetrimino = next(elements)
+            except StopIteration:
+                # reset iterable
+                elements = iter(tetriminos)
+                tetrimino = next(elements)
+            # clear screen
+            pygame.draw.rect(screen, black, clearer)
+            # then draw it
+            tetrimino.draw(screen)
 
-    L.moveDown()
-    if L.isColliding(zone_sprites_groups, mode[1]):
-        L.moveUp()
-        zone_sprites_groups.append(L)
-        L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE)
-        L.center(Z_WIDTH)
-        L.draw(zone)
-    else:
-        L.clear(zone, screen)
-        L.draw(zone)
+            L.moveDown()
+            if L.isColliding(zone_sprites_groups, mode[1], 0, mode[0]):
+                L.moveUp()
+                zone_sprites_groups.append(L)
+                L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE)
+                L.center(Z_WIDTH)
+                L.draw(zone)
+            else:
+                L.clear(zone, screen)
+                L.draw(zone)
     screen.blit(zone, (Z_LEFT, 0))
 
     pygame.display.update()
-    # wait a second
-    pygame.time.wait(F_TIME)
-
 
 print("Exiting game")
