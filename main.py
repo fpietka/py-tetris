@@ -148,6 +148,20 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key in (pygame.K_ESCAPE, pygame.K_q):
                 running = False
+            if event.key == pygame.K_LEFT:
+                L.moveLeft()
+                if L.isColliding(zone_sprites_groups, mode[1], 0, mode[0]):
+                    L.moveRight()
+                else:
+                    L.clear(zone, screen)
+                    L.draw(zone)
+            if event.key == pygame.K_RIGHT:
+                L.moveRight()
+                if L.isColliding(zone_sprites_groups, mode[1], 0, mode[0]):
+                    L.moveLeft()
+                else:
+                    L.clear(zone, screen)
+                    L.draw(zone)
 
         if event.type == FALLEVENT:
             # select next tetrimino
