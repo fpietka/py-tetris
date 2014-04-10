@@ -162,6 +162,13 @@ while running:
                 else:
                     L.clear(zone, screen)
                     L.draw(zone)
+            if event.key == pygame.K_DOWN:
+                L.moveDown()
+                if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
+                    L.moveUp()
+                else:
+                    L.clear(zone, screen)
+                    L.draw(zone)
 
         if event.type == FALLEVENT:
             # select next tetrimino
