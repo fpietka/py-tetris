@@ -1,5 +1,5 @@
 import pygame
-
+import math
 
 white = (255, 255, 255)
 
@@ -79,9 +79,11 @@ class Tetrimino(pygame.sprite.Group):
             return True
 
     def center(self, width):
-        groupwidth = max(sprite.rect.right for sprite in self.sprites())
+        groupwidth = max(sprite.rect.right for sprite in self.sprites()) / self.size
+        zonecenter = (width / self.size) / 2
+        start = zonecenter - int(math.ceil(float(groupwidth) / 2))
+        print self.size
         for sprite in self.sprites():
-            sprite.rect.left += (width / 2) - (groupwidth / 2)
+            # why +7 here?
+            sprite.rect.left += (start * self.size) + 7
         return self
-
-
