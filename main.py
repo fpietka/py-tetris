@@ -43,8 +43,7 @@ pygame.draw.rect(zone, white, zone.get_rect(), 1)
 
 Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
 
-background = pygame.Surface((Z_WIDTH, Z_HEIGHT))
-background.fill(black)
+background = zone.copy()
 
 screen.blit(zone, (Z_LEFT, 0))
 
