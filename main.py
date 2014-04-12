@@ -42,8 +42,6 @@ zone = Zone((Z_WIDTH, Z_HEIGHT))
 
 background = zone.copy()
 
-zone_sprites_groups = list()
-
 Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
 
 screen.blit(zone, (Z_LEFT, 0))
@@ -153,21 +151,21 @@ while running:
                 running = False
             if event.key == pygame.K_LEFT:
                 L.moveLeft()
-                if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
+                if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
                     L.moveRight()
                 else:
                     L.clear(zone)
                     L.draw(zone)
             if event.key == pygame.K_RIGHT:
                 L.moveRight()
-                if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
+                if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
                     L.moveLeft()
                 else:
                     L.clear(zone)
                     L.draw(zone)
             if event.key == pygame.K_DOWN:
                 L.moveDown()
-                if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
+                if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
                     L.moveUp()
                 else:
                     L.clear(zone)
@@ -187,9 +185,9 @@ while running:
             tetrimino.draw(screen)
 
             L.moveDown()
-            if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
+            if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
                 L.moveUp()
-                zone_sprites_groups.append(L)
+                zone.sprites.append(L)
                 L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background)
                 L.center(Z_WIDTH)
                 L.draw(zone)
