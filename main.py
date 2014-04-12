@@ -136,11 +136,6 @@ pygame.display.update()
 FALLEVENT = pygame.USEREVENT + 1
 pygame.time.set_timer(FALLEVENT, F_TIME)
 
-clearer = pygame.Rect(0, 0, (B_SIZE + 2) * 4, (B_SIZE + 2) * 4)
-
-# iter through tetriminos
-elements = iter(tetriminos)
-
 running = True
 while running:
     for event in pygame.event.get():
@@ -172,18 +167,6 @@ while running:
                     L.draw(zone)
 
         if event.type == FALLEVENT:
-            # select next tetrimino
-            try:
-                tetrimino = next(elements)
-            except StopIteration:
-                # reset iterable
-                elements = iter(tetriminos)
-                tetrimino = next(elements)
-            # clear screen
-            tetrimino.clear(zone)
-            # then draw it
-            tetrimino.draw(screen)
-
             L.moveDown()
             if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
                 L.moveUp()
