@@ -29,17 +29,21 @@ class Tetrimino(pygame.sprite.Group):
         self.blocks = blocks
         # use first block to draw an image
         block = pygame.Rect(blocks[0])
-        block.top, block.left = 0, 0
-        image = pygame.Surface(block.size)
-        # inner block is a little smaller
-        innerblock = pygame.Rect(self.outline, self.outline, block.size[0] - self.outline * 2, block.size[1] - self.outline * 2)
-        pygame.draw.rect(image, self.color, innerblock, self.outline)
+        image = self.buildImage(block)
         for block in blocks:
             sprite = pygame.sprite.Sprite()
             sprite.rect = pygame.Rect(block)
             sprite.image = image
             sprite.add(self)
         return self
+
+    def buildImage(self, block):
+        block.top, block.left = 0, 0
+        image = pygame.Surface(block.size)
+        # inner block is a little smaller
+        innerblock = pygame.Rect(self.outline, self.outline, block.size[0] - self.outline * 2, block.size[1] - self.outline * 2)
+        pygame.draw.rect(image, self.color, innerblock, self.outline)
+        return image
 
     def setColor(self, color):
         """Set the color of the sprites"""
