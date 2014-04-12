@@ -35,7 +35,7 @@ motions = (M_CW, M_CCW)
 Z_WIDTH, Z_HEIGHT = screen.get_size()
 Z_WIDTH = Z_HEIGHT / 2
 
-B_SIZE = (Z_WIDTH - 11) / 10
+B_SIZE = Z_WIDTH / 10
 
 zone = pygame.Surface((Z_WIDTH, Z_HEIGHT))
 zone_sprites_groups = list()
@@ -57,9 +57,9 @@ tetriminos_definitions = (
         'color': yellow,
         'blocks': (
             (0, 0, B_SIZE, B_SIZE),
-            (B_SIZE + 2, 0, B_SIZE, B_SIZE),
-            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            (0, B_SIZE + 2, B_SIZE, B_SIZE)
+            (B_SIZE, 0, B_SIZE, B_SIZE),
+            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
+            (0, B_SIZE, B_SIZE, B_SIZE)
         )
     },
     {
@@ -67,9 +67,9 @@ tetriminos_definitions = (
         'color': cyan,
         'blocks': (
             (0, 0, B_SIZE, B_SIZE),
-            (B_SIZE + 2, 0, B_SIZE, B_SIZE),
-            ((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE),
-            ((B_SIZE + 2) * 3, 0, B_SIZE, B_SIZE)
+            (B_SIZE, 0, B_SIZE, B_SIZE),
+            ((B_SIZE) * 2, 0, B_SIZE, B_SIZE),
+            ((B_SIZE) * 3, 0, B_SIZE, B_SIZE)
         )
     },
     {
@@ -77,39 +77,39 @@ tetriminos_definitions = (
         'color': blue,
         'blocks': (
             (0, 0, B_SIZE, B_SIZE),
-            (0, B_SIZE + 2, B_SIZE, B_SIZE),
-            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            ((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
+            (0, B_SIZE, B_SIZE, B_SIZE),
+            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
+            ((B_SIZE) * 2, B_SIZE, B_SIZE, B_SIZE)
         )
     },
     {
         'name': 'L',
         'color': orange,
         'blocks': (
-            (0, B_SIZE + 2, B_SIZE, B_SIZE),
-            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            ((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            ((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE)
+            (0, B_SIZE, B_SIZE, B_SIZE),
+            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
+            ((B_SIZE) * 2, B_SIZE, B_SIZE, B_SIZE),
+            ((B_SIZE) * 2, 0, B_SIZE, B_SIZE)
         )
     },
     {
         'name': 'S',
         'color': green,
         'blocks': (
-            (0, B_SIZE + 2, B_SIZE, B_SIZE),
-            (B_SIZE + 2, 0, B_SIZE, B_SIZE),
-            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            ((B_SIZE + 2) * 2, 0, B_SIZE, B_SIZE)
+            (0, B_SIZE, B_SIZE, B_SIZE),
+            (B_SIZE, 0, B_SIZE, B_SIZE),
+            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
+            ((B_SIZE) * 2, 0, B_SIZE, B_SIZE)
         )
     },
     {
         'name': 'T',
         'color': purple,
         'blocks': (
-            (0, B_SIZE + 2, B_SIZE, B_SIZE),
-            (B_SIZE + 2, 0, B_SIZE, B_SIZE),
-            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            ((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
+            (0, B_SIZE, B_SIZE, B_SIZE),
+            (B_SIZE, 0, B_SIZE, B_SIZE),
+            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
+            ((B_SIZE) * 2, B_SIZE, B_SIZE, B_SIZE)
         )
     },
     {
@@ -117,9 +117,9 @@ tetriminos_definitions = (
         'color': red,
         'blocks': (
             (0, 0, B_SIZE, B_SIZE),
-            (B_SIZE + 2, 0, B_SIZE, B_SIZE),
-            (B_SIZE + 2, B_SIZE + 2, B_SIZE, B_SIZE),
-            ((B_SIZE + 2) * 2, B_SIZE + 2, B_SIZE, B_SIZE)
+            (B_SIZE, 0, B_SIZE, B_SIZE),
+            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
+            ((B_SIZE) * 2, B_SIZE, B_SIZE, B_SIZE)
         )
     },
 )

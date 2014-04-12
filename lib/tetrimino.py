@@ -31,7 +31,9 @@ class Tetrimino(pygame.sprite.Group):
         block = pygame.Rect(blocks[0])
         block.top, block.left = 0, 0
         image = pygame.Surface(block.size)
-        pygame.draw.rect(image, self.color, block, self.outline)
+        # inner block is a little smaller
+        innerblock = pygame.Rect(self.outline, self.outline, block.size[0] - self.outline * 2, block.size[1] - self.outline * 2)
+        pygame.draw.rect(image, self.color, innerblock, self.outline)
         for block in blocks:
             sprite = pygame.sprite.Sprite()
             sprite.rect = pygame.Rect(block)
@@ -49,22 +51,22 @@ class Tetrimino(pygame.sprite.Group):
 
     def moveDown(self):
         for sprite in self.sprites():
-            sprite.rect.top += self.size +2
+            sprite.rect.top += self.size
         return self
 
     def moveUp(self):
         for sprite in self.sprites():
-            sprite.rect.top -= self.size +2
+            sprite.rect.top -= self.size
         return self
 
     def moveLeft(self):
         for sprite in self.sprites():
-            sprite.rect.left -= self.size +2
+            sprite.rect.left -= self.size
         return self
 
     def moveRight(self):
         for sprite in self.sprites():
-            sprite.rect.left += self.size +2
+            sprite.rect.left += self.size
         return self
 
     def isColliding(self, zone_sprites_groups, zone_bottom, zone_left, zone_right):
@@ -86,8 +88,6 @@ class Tetrimino(pygame.sprite.Group):
         groupwidth = max(sprite.rect.right for sprite in self.sprites()) / self.size
         zonecenter = (width / self.size) / 2
         start = zonecenter - int(math.ceil(float(groupwidth) / 2))
-        print self.size
         for sprite in self.sprites():
-            # why +7 here?
-            sprite.rect.left += (start * self.size) + 7
+            sprite.rect.left += (start * self.size)
         return self
