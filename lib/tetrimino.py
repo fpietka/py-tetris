@@ -7,7 +7,7 @@ D_UP = 0
 
 
 class Tetrimino(pygame.sprite.Group):
-    def __init__(self, definition, size):
+    def __init__(self, definition, size, background):
         super(Tetrimino, self).__init__()
         self.blocks = list()
         self.color = white
@@ -18,6 +18,7 @@ class Tetrimino(pygame.sprite.Group):
         self.setColor(definition['color'])
         self.setBlocks(definition['blocks'])
         self.size = size
+        self.background = background
 
     def setName(self, name):
         self.name = name
@@ -42,6 +43,9 @@ class Tetrimino(pygame.sprite.Group):
         """Set the color of the sprites"""
         self.color = color
         return self
+
+    def clear(self, zone):
+        super(Tetrimino, self).clear(zone, self.background)
 
     def moveDown(self):
         for sprite in self.sprites():

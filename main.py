@@ -43,6 +43,9 @@ pygame.draw.rect(zone, white, zone.get_rect(), 1)
 
 Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
 
+background = pygame.Surface((Z_WIDTH, Z_HEIGHT))
+background.fill(black)
+
 screen.blit(zone, (Z_LEFT, 0))
 
 F_TIME = 500
@@ -123,10 +126,10 @@ tetriminos_definitions = (
 
 tetriminos = list()
 for definition in tetriminos_definitions:
-    tetriminos.append(Tetrimino(definition, B_SIZE))
+    tetriminos.append(Tetrimino(definition, B_SIZE, background))
 
 
-L = Tetrimino(tetriminos_definitions[2], B_SIZE)
+L = Tetrimino(tetriminos_definitions[2], B_SIZE, background)
 L.center(Z_WIDTH)
 L.draw(zone)
 screen.blit(zone, (Z_LEFT, 0))
@@ -153,21 +156,21 @@ while running:
                 if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
                     L.moveRight()
                 else:
-                    L.clear(zone, screen)
+                    L.clear(zone)
                     L.draw(zone)
             if event.key == pygame.K_RIGHT:
                 L.moveRight()
                 if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
                     L.moveLeft()
                 else:
-                    L.clear(zone, screen)
+                    L.clear(zone)
                     L.draw(zone)
             if event.key == pygame.K_DOWN:
                 L.moveDown()
                 if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
                     L.moveUp()
                 else:
-                    L.clear(zone, screen)
+                    L.clear(zone)
                     L.draw(zone)
 
         if event.type == FALLEVENT:
@@ -179,7 +182,7 @@ while running:
                 elements = iter(tetriminos)
                 tetrimino = next(elements)
             # clear screen
-            pygame.draw.rect(screen, black, clearer)
+            tetrimino.clear(zone)
             # then draw it
             tetrimino.draw(screen)
 
@@ -187,11 +190,11 @@ while running:
             if L.isColliding(zone_sprites_groups, zone.get_rect().bottom, 0, zone.get_rect().right):
                 L.moveUp()
                 zone_sprites_groups.append(L)
-                L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE)
+                L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background)
                 L.center(Z_WIDTH)
                 L.draw(zone)
             else:
-                L.clear(zone, screen)
+                L.clear(zone)
                 L.draw(zone)
     screen.blit(zone, (Z_LEFT, 0))
 
