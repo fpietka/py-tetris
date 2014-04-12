@@ -38,12 +38,13 @@ Z_WIDTH = Z_HEIGHT / 2
 B_SIZE = Z_WIDTH / 10
 
 zone = pygame.Surface((Z_WIDTH, Z_HEIGHT))
-zone_sprites_groups = list()
 pygame.draw.rect(zone, white, zone.get_rect(), 1)
 
-Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
-
 background = zone.copy()
+
+zone_sprites_groups = list()
+
+Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
 
 screen.blit(zone, (Z_LEFT, 0))
 
