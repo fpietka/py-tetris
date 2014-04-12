@@ -4,6 +4,7 @@ import pygame
 import random
 
 from lib.tetrimino import Tetrimino
+from lib.zone import Zone
 
 pygame.init()
 
@@ -37,8 +38,7 @@ Z_WIDTH = Z_HEIGHT / 2
 
 B_SIZE = Z_WIDTH / 10
 
-zone = pygame.Surface((Z_WIDTH, Z_HEIGHT))
-pygame.draw.rect(zone, white, zone.get_rect(), 1)
+zone = Zone((Z_WIDTH, Z_HEIGHT))
 
 background = zone.copy()
 

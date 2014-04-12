@@ -1,1 +1,1 @@
-__all__ = ["Tetrimino"]
+__all__ = ["Tetrimino", "Zone"]
