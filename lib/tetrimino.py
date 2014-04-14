@@ -28,11 +28,11 @@ class Tetrimino(pygame.sprite.Group):
         """Build sprites group"""
         self.blocks = blocks
         # use first block to draw an image
-        block = pygame.Rect(blocks[0])
+        block = pygame.Rect(blocks[0][0] * self.size, blocks[0][1] * self.size, self.size, self.size)
         image = self.buildImage(block)
         for block in blocks:
             sprite = pygame.sprite.Sprite()
-            sprite.rect = pygame.Rect(block)
+            sprite.rect = pygame.Rect(block[0] * self.size, block[1] * self.size, self.size, self.size)
             sprite.image = image
             sprite.add(self)
         return self

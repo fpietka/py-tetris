@@ -53,73 +53,133 @@ tetriminos_definitions = (
     {
         'name': 'O',
         'color': yellow,
-        'blocks': (
-            (0, 0, B_SIZE, B_SIZE),
-            (B_SIZE, 0, B_SIZE, B_SIZE),
-            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
-            (0, B_SIZE, B_SIZE, B_SIZE)
-        )
+        'blocks': ((
+            (0, 0),
+            (1, 0),
+            (1, 1),
+            (0, 1)
+        ),)
     },
     {
         'name': 'I',
         'color': cyan,
-        'blocks': (
-            (0, 0, B_SIZE, B_SIZE),
-            (B_SIZE, 0, B_SIZE, B_SIZE),
-            ((B_SIZE) * 2, 0, B_SIZE, B_SIZE),
-            ((B_SIZE) * 3, 0, B_SIZE, B_SIZE)
-        )
+        'blocks': ((
+            (0, 1),
+            (1, 1),
+            (2, 1),
+            (3, 1)
+        ), (
+            (1, 0),
+            (1, 1),
+            (1, 2),
+            (1, 3)
+        ))
     },
     {
         'name': 'J',
         'color': blue,
-        'blocks': (
-            (0, 0, B_SIZE, B_SIZE),
-            (0, B_SIZE, B_SIZE, B_SIZE),
-            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
-            ((B_SIZE) * 2, B_SIZE, B_SIZE, B_SIZE)
-        )
+        'blocks': ((
+            (0, 0),
+            (0, 1),
+            (1, 1),
+            (2, 1)
+        ),(
+            (0, 0),
+            (1, 0),
+            (0, 1),
+            (0, 2)
+        ),(
+            (0, 0),
+            (1, 0),
+            (2, 0),
+            (2, 1)
+        ),(
+            (1, 0),
+            (1, 1),
+            (1, 2),
+            (0, 2)
+        ))
     },
     {
         'name': 'L',
         'color': orange,
-        'blocks': (
-            (0, B_SIZE, B_SIZE, B_SIZE),
-            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
-            ((B_SIZE) * 2, B_SIZE, B_SIZE, B_SIZE),
-            ((B_SIZE) * 2, 0, B_SIZE, B_SIZE)
-        )
+        'blocks': ((
+            (0, 1),
+            (1, 1),
+            (2, 1),
+            (2, 0)
+        ),(
+            (0, 0),
+            (0, 1),
+            (0, 2),
+            (1, 2)
+        ),(
+            (0, 0),
+            (0, 1),
+            (1, 0),
+            (2, 0)
+        ),(
+            (1, 0),
+            (1, 1),
+            (1, 2),
+            (0, 0)
+        ))
     },
     {
         'name': 'S',
         'color': green,
-        'blocks': (
-            (0, B_SIZE, B_SIZE, B_SIZE),
-            (B_SIZE, 0, B_SIZE, B_SIZE),
-            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
-            ((B_SIZE) * 2, 0, B_SIZE, B_SIZE)
-        )
+        'blocks': ((
+            (0, 1),
+            (1, 0),
+            (1, 1),
+            (2, 0)
+        ),(
+            (0, 0),
+            (0, 1),
+            (1, 1),
+            (1, 2)
+        ))
     },
     {
         'name': 'T',
         'color': purple,
-        'blocks': (
-            (0, B_SIZE, B_SIZE, B_SIZE),
-            (B_SIZE, 0, B_SIZE, B_SIZE),
-            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
-            ((B_SIZE) * 2, B_SIZE, B_SIZE, B_SIZE)
-        )
+        'blocks': ((
+            (0, 1),
+            (1, 0),
+            (1, 1),
+            (2, 1)
+        ),(
+            (0, 0),
+            (0, 1),
+            (1, 1),
+            (0, 2)
+        ),(
+            (0, 0),
+            (1, 0),
+            (1, 1),
+            (2, 0)
+        ),(
+            (1, 0),
+            (0, 1),
+            (1, 1),
+            (1, 2)
+        ),)
     },
     {
         'name': 'Z',
         'color': red,
-        'blocks': (
-            (0, 0, B_SIZE, B_SIZE),
-            (B_SIZE, 0, B_SIZE, B_SIZE),
-            (B_SIZE, B_SIZE, B_SIZE, B_SIZE),
-            ((B_SIZE) * 2, B_SIZE, B_SIZE, B_SIZE)
-        )
-    },
+        'blocks': ((
+            (0, 0),
+            (1, 0),
+            (1, 1),
+            (2, 1)
+        ),(
+            (1, 0),
+            (1, 1),
+            (0, 1),
+            (0, 2)
+        ))
+    }
 )
 
 tetriminos = list()
