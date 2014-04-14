@@ -225,6 +225,10 @@ while running:
                 else:
                     L.clear(zone)
                     L.draw(zone)
+            if event.key == pygame.K_SPACE:
+                if L.rotate():
+                    L.clear(zone)
+                    L.draw(zone)
 
         if event.type == FALLEVENT:
             L.moveDown()

@@ -1,5 +1,6 @@
 import pygame
 import math
+from itertools import cycle
 
 white = (255, 255, 255)
 
@@ -16,8 +17,9 @@ class Tetrimino(pygame.sprite.Group):
         # XXX maybe have 3 separate parameters in init
         self.setName(definition['name'])
         self.setColor(definition['color'])
-        self.setBlocks(definition['blocks'])
+        self.blocks = cycle(definition['blocks'])
         self.size = size
+        self.setBlocks(next(self.blocks))
         self.background = background
 
     def setName(self, name):
@@ -26,7 +28,6 @@ class Tetrimino(pygame.sprite.Group):
 
     def setBlocks(self, blocks):
         """Build sprites group"""
-        self.blocks = blocks
         # use first block to draw an image
         block = pygame.Rect(blocks[0][0] * self.size, blocks[0][1] * self.size, self.size, self.size)
         image = self.buildImage(block)
@@ -72,6 +73,10 @@ class Tetrimino(pygame.sprite.Group):
         for sprite in self.sprites():
             sprite.rect.left += self.size
         return self
+
+    def rotate(self):
+        self.empty()
+        self.setBlocks(next(self.blocks))
 
     def isColliding(self, zone_sprites_groups, zone_bottom, zone_left, zone_right):
         # Test collisions
