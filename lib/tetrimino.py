@@ -7,7 +7,7 @@ white = (255, 255, 255)
 D_UP = 0
 
 
-class Tetrimino(pygame.sprite.Group):
+class Tetrimino(pygame.sprite.OrderedUpdates):
     def __init__(self, definition, size, background):
         super(Tetrimino, self).__init__()
         self.blocks = list()
