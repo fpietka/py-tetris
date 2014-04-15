@@ -182,10 +182,6 @@ tetriminos_definitions = (
     }
 )
 
-tetriminos = list()
-for definition in tetriminos_definitions:
-    tetriminos.append(Tetrimino(definition, B_SIZE, background))
-
 
 L = Tetrimino(tetriminos_definitions[2], B_SIZE, background)
 L.center(Z_WIDTH)
