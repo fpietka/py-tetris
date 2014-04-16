@@ -54,25 +54,35 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
     def clear(self, zone):
         super(Tetrimino, self).clear(zone, self.background)
 
-    def moveDown(self):
-        for sprite in self.sprites():
-            sprite.rect.top += self.size
+    def moveUp(self):
+        self._move('up')
         return self
 
-    def moveUp(self):
-        for sprite in self.sprites():
-            sprite.rect.top -= self.size
+    def moveDown(self):
+        self._move('down')
         return self
 
     def moveLeft(self):
-        for sprite in self.sprites():
-            sprite.rect.left -= self.size
+        self._move('left')
         return self
 
     def moveRight(self):
-        for sprite in self.sprites():
-            sprite.rect.left += self.size
+        self._move('right')
         return self
+
+    def _move(self, direction):
+        if direction == 'up':
+            for sprite in self.sprites():
+                sprite.rect.top -= self.size
+        elif direction == 'down':
+            for sprite in self.sprites():
+                sprite.rect.top += self.size
+        elif direction == 'left':
+            for sprite in self.sprites():
+                sprite.rect.left -= self.size
+        elif direction == 'right':
+            for sprite in self.sprites():
+                sprite.rect.left += self.size
 
     def rotate(self):
         self.empty()
