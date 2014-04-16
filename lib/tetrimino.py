@@ -89,10 +89,11 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         self.setBlocks(next(self.blocks))
 
     def isColliding(self, zone_sprites_groups, zone_bottom, zone_left, zone_right):
-        # Test collisions
+        # Test collisions between sprites
         for group in zone_sprites_groups:
             if pygame.sprite.groupcollide(group, self, False, False):
                 return True
+        # Test collisions with boundaries
         bottom = max(sprite.rect.bottom for sprite in self.sprites())
         if bottom > zone_bottom:
             return True
