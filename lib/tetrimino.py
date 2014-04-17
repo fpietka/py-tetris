@@ -19,6 +19,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         self.setColor(definition['color'])
         self.blocks = cycle(definition['blocks'])
         self.size = size
+        self.pivot = (0, 0)
         self.setBlocks(next(self.blocks))
         self.background = background
 
@@ -33,7 +34,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         image = self.buildImage(block)
         for block in blocks:
             sprite = pygame.sprite.Sprite()
-            sprite.rect = pygame.Rect(block[0] * self.size, block[1] * self.size, self.size, self.size)
+            sprite.rect = pygame.Rect(block[0] * self.size + self.pivot[0], block[1] * self.size + self.pivot[1], self.size, self.size)
             sprite.image = image
             sprite.add(self)
         return self
