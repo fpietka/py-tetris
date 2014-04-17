@@ -17,10 +17,10 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         # XXX maybe have 3 separate parameters in init
         self.setName(definition['name'])
         self.setColor(definition['color'])
-        self.blocks = cycle(definition['blocks'])
+        self.blocks_cycle = cycle(definition['blocks'])
         self.size = size
         self.pivot = (0, 0)
-        self.setBlocks(next(self.blocks))
+        self.setBlocks(next(self.blocks_cycle))
         self.background = background
 
     def setName(self, name):
@@ -30,6 +30,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
     def setBlocks(self, blocks):
         """Build sprites group"""
         # use first block to draw an image
+        self.blocks = blocks
         block = pygame.Rect(blocks[0][0] * self.size, blocks[0][1] * self.size, self.size, self.size)
         image = self.buildImage(block)
         for block in blocks:
@@ -87,7 +88,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
 
     def rotate(self):
         self.empty()
-        self.setBlocks(next(self.blocks))
+        self.setBlocks(next(self.blocks_cycle))
 
     def isColliding(self, zone_sprites_groups, zone_bottom, zone_left, zone_right):
         # Test collisions between sprites
