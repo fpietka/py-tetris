@@ -87,8 +87,22 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
                 sprite.rect.left += self.size
 
     def rotate(self):
+        # previous set of blocks basic positions
+        previous_positions = self.blocks
+        # get current position
+        positions = list()
+        for sprite in self.sprites():
+            positions.append((sprite.rect.left / self.size, sprite.rect.top / self.size))
+        # empty sprite list
         self.empty()
+        # get next set of blocks
         self.setBlocks(next(self.blocks_cycle))
+        new_positions = self.blocks
+        # set new calculated positions
+        for index, sprite in enumerate(self.sprites()):
+            sprite.rect.left = (positions[index][0] - previous_positions[index][0] + new_positions[index][0]) * self.size
+            sprite.rect.top = (positions[index][1] - previous_positions[index][1] + new_positions[index][1]) * self.size
+
 
     def isColliding(self, zone_sprites_groups, zone_bottom, zone_left, zone_right):
         # Test collisions between sprites
