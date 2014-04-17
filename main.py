@@ -45,6 +45,8 @@ B_SIZE = Z_WIDTH / 10
 zone = Zone((Z_WIDTH, Z_HEIGHT))
 
 background = zone.copy()
+zone.background = background
+zone.block_size = B_SIZE
 
 Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
 
@@ -250,6 +252,7 @@ while running:
                 zone.sprites.append(L)
                 L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background, zone)
                 L.center(Z_WIDTH)
+                zone.checkLines()
                 L.draw(zone)
             else:
                 L.clear(zone)
