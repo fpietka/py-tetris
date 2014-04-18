@@ -87,7 +87,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
                 sprite.rect.left += self.size
 
     def rotate(self):
-        # previous set of blocks basic positions
+        # previous set of blocks base positions
         previous_positions = self.blocks
         # get current position
         positions = list()
