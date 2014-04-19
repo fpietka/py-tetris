@@ -131,6 +131,9 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
             return True
 
     def center(self, width):
+        top = min(sprite.rect.top for sprite in self.sprites()) / self.size
+        if top > 0:
+            self.moveUp()
         groupwidth = max(sprite.rect.right for sprite in self.sprites()) / self.size
         zonecenter = (width / self.size) / 2
         start = zonecenter - int(math.ceil(float(groupwidth) / 2))
