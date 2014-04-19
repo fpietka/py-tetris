@@ -183,7 +183,7 @@ tetriminos_definitions = (
 )
 
 
-L = Tetrimino(tetriminos_definitions[2], B_SIZE, background)
+L = Tetrimino(tetriminos_definitions[2], B_SIZE, background, zone)
 L.center(Z_WIDTH)
 L.draw(zone)
 screen.blit(zone, (Z_LEFT, 0))
@@ -202,21 +202,21 @@ while running:
                 running = False
             if event.key == pygame.K_LEFT:
                 L.moveLeft()
-                if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
+                if L.isColliding():
                     L.moveRight()
                 else:
                     L.clear(zone)
                     L.draw(zone)
             if event.key == pygame.K_RIGHT:
                 L.moveRight()
-                if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
+                if L.isColliding():
                     L.moveLeft()
                 else:
                     L.clear(zone)
                     L.draw(zone)
             if event.key == pygame.K_DOWN:
                 L.moveDown()
-                if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
+                if L.isColliding():
                     L.moveUp()
                 else:
                     L.clear(zone)
@@ -228,10 +228,10 @@ while running:
 
         if event.type == FALLEVENT:
             L.moveDown()
-            if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
+            if L.isColliding():
                 L.moveUp()
                 zone.sprites.append(L)
-                L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background)
+                L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background, zone)
                 L.center(Z_WIDTH)
                 L.draw(zone)
             else:

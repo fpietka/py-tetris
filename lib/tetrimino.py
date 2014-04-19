@@ -8,7 +8,7 @@ D_UP = 0
 
 
 class Tetrimino(pygame.sprite.OrderedUpdates):
-    def __init__(self, definition, size, background):
+    def __init__(self, definition, size, background, zone):
         super(Tetrimino, self).__init__()
         self.blocks = list()
         self.color = white
@@ -22,6 +22,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         self.pivot = (0, 0)
         self.setBlocks(next(self.blocks_cycle))
         self.background = background
+        self.zone = zone
 
     def setName(self, name):
         self.name = name
@@ -105,20 +106,21 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         return True
 
 
-    def isColliding(self, zone_sprites_groups, zone_bottom, zone_left, zone_right):
+    def isColliding(self):
         # Test collisions between sprites
-        for group in zone_sprites_groups:
+        for group in self.zone.sprites:
             if pygame.sprite.groupcollide(group, self, False, False):
                 return True
         # Test collisions with boundaries
+        zone = self.zone.get_rect()
         bottom = max(sprite.rect.bottom for sprite in self.sprites())
-        if bottom > zone_bottom:
+        if bottom > zone.bottom:
             return True
         left = min(sprite.rect.left for sprite in self.sprites())
-        if left < zone_left:
+        if left < zone.left:
             return True
         right = max(sprite.rect.right for sprite in self.sprites())
-        if right > zone_right:
+        if right > zone.right:
             return True
 
     def center(self, width):
