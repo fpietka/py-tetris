@@ -105,6 +105,13 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
             sprite.rect.top = (positions[index][1] - previous_positions[index][1] + new_positions[index][1]) * self.size
         return True
 
+        if self.isColliding():
+            for index, sprite in enumerate(self.sprites()):
+                sprite.rect.left = positions[index][0] * self.size
+                sprite.rect.top = positions[index][1] * self.size
+            return False
+        else:
+            return True
 
     def isColliding(self):
         # Test collisions between sprites
