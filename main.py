@@ -192,6 +192,11 @@ pygame.display.update()
 FALLEVENT = pygame.USEREVENT + 1
 pygame.time.set_timer(FALLEVENT, F_TIME)
 
+# sounds
+sounds = dict()
+sounds["rotate"] = pygame.mixer.Sound("res/rotate.wav")
+sounds["fall"] = pygame.mixer.Sound("res/fall.wav")
+
 running = True
 while running:
     for event in pygame.event.get():
@@ -223,12 +228,14 @@ while running:
                     L.draw(zone)
             if event.key == pygame.K_SPACE:
                 if L.rotate():
+                    sounds["rotate"].play()
                     L.clear(zone)
                     L.draw(zone)
 
         if event.type == FALLEVENT:
             L.moveDown()
             if L.isColliding():
+                sounds["fall"].play()
                 L.moveUp()
                 zone.sprites.append(L)
                 L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background, zone)
