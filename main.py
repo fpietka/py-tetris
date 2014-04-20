@@ -64,13 +64,13 @@ tetriminos_definitions = (
         'name': 'I',
         'color': cyan,
         'blocks': ((
-            (0, 1),
             (1, 1),
+            (0, 1),
             (2, 1),
             (3, 1)
         ), (
-            (1, 0),
             (1, 1),
+            (1, 0),
             (1, 2),
             (1, 3)
         ))
@@ -80,23 +80,23 @@ tetriminos_definitions = (
         'color': blue,
         'blocks': ((
             (0, 0),
-            (0, 1),
-            (1, 1),
-            (2, 1)
-        ),(
-            (0, 0),
-            (1, 0),
-            (0, 1),
-            (0, 2)
-        ),(
-            (0, 0),
             (1, 0),
             (2, 0),
             (2, 1)
         ),(
-            (1, 0),
-            (1, 1),
+            (2, 0),
+            (2, 1),
+            (2, 2),
+            (1, 2)
+        ),(
+            (0, 1),
+            (0, 2),
             (1, 2),
+            (2, 2)
+        ),(
+            (0, 0),
+            (1, 0),
+            (0, 1),
             (0, 2)
         ))
     },
@@ -104,10 +104,10 @@ tetriminos_definitions = (
         'name': 'L',
         'color': orange,
         'blocks': ((
-            (0, 1),
-            (1, 1),
-            (2, 1),
-            (2, 0)
+            (0, 2),
+            (1, 2),
+            (2, 2),
+            (2, 1)
         ),(
             (0, 0),
             (0, 1),
@@ -119,35 +119,35 @@ tetriminos_definitions = (
             (1, 0),
             (2, 0)
         ),(
-            (1, 0),
-            (1, 1),
-            (1, 2),
-            (0, 0)
+            (2, 0),
+            (2, 1),
+            (2, 2),
+            (1, 0)
         ))
     },
     {
         'name': 'S',
         'color': green,
         'blocks': ((
-            (0, 1),
             (1, 0),
+            (0, 1),
             (1, 1),
             (2, 0)
         ),(
-            (0, 0),
-            (0, 1),
             (1, 1),
-            (1, 2)
+            (1, 0),
+            (2, 1),
+            (2, 2)
         ))
     },
     {
         'name': 'T',
         'color': purple,
         'blocks': ((
-            (0, 1),
-            (1, 0),
+            (0, 2),
             (1, 1),
-            (2, 1)
+            (1, 2),
+            (2, 2)
         ),(
             (0, 0),
             (0, 1),
@@ -159,23 +159,23 @@ tetriminos_definitions = (
             (1, 1),
             (2, 0)
         ),(
-            (1, 0),
-            (0, 1),
+            (2, 0),
             (1, 1),
-            (1, 2)
+            (2, 1),
+            (2, 2)
         ),)
     },
     {
         'name': 'Z',
         'color': red,
         'blocks': ((
-            (0, 0),
             (1, 0),
+            (0, 0),
             (1, 1),
             (2, 1)
         ),(
-            (1, 0),
             (1, 1),
+            (1, 0),
             (0, 1),
             (0, 2)
         ))
@@ -183,7 +183,7 @@ tetriminos_definitions = (
 )
 
 
-L = Tetrimino(tetriminos_definitions[2], B_SIZE, background)
+L = Tetrimino(tetriminos_definitions[2], B_SIZE, background, zone)
 L.center(Z_WIDTH)
 L.draw(zone)
 screen.blit(zone, (Z_LEFT, 0))
@@ -202,21 +202,21 @@ while running:
                 running = False
             if event.key == pygame.K_LEFT:
                 L.moveLeft()
-                if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
+                if L.isColliding():
                     L.moveRight()
                 else:
                     L.clear(zone)
                     L.draw(zone)
             if event.key == pygame.K_RIGHT:
                 L.moveRight()
-                if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
+                if L.isColliding():
                     L.moveLeft()
                 else:
                     L.clear(zone)
                     L.draw(zone)
             if event.key == pygame.K_DOWN:
                 L.moveDown()
-                if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
+                if L.isColliding():
                     L.moveUp()
                 else:
                     L.clear(zone)
@@ -228,10 +228,10 @@ while running:
 
         if event.type == FALLEVENT:
             L.moveDown()
-            if L.isColliding(zone.sprites, zone.get_rect().bottom, 0, zone.get_rect().right):
+            if L.isColliding():
                 L.moveUp()
                 zone.sprites.append(L)
-                L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background)
+                L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background, zone)
                 L.center(Z_WIDTH)
                 L.draw(zone)
             else:

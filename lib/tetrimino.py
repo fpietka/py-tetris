@@ -8,7 +8,7 @@ D_UP = 0
 
 
 class Tetrimino(pygame.sprite.OrderedUpdates):
-    def __init__(self, definition, size, background):
+    def __init__(self, definition, size, background, zone):
         super(Tetrimino, self).__init__()
         self.blocks = list()
         self.color = white
@@ -17,10 +17,12 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         # XXX maybe have 3 separate parameters in init
         self.setName(definition['name'])
         self.setColor(definition['color'])
-        self.blocks = cycle(definition['blocks'])
+        self.blocks_cycle = cycle(definition['blocks'])
         self.size = size
-        self.setBlocks(next(self.blocks))
+        self.pivot = (0, 0)
+        self.setBlocks(next(self.blocks_cycle))
         self.background = background
+        self.zone = zone
 
     def setName(self, name):
         self.name = name
@@ -29,11 +31,12 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
     def setBlocks(self, blocks):
         """Build sprites group"""
         # use first block to draw an image
+        self.blocks = blocks
         block = pygame.Rect(blocks[0][0] * self.size, blocks[0][1] * self.size, self.size, self.size)
         image = self.buildImage(block)
         for block in blocks:
             sprite = pygame.sprite.Sprite()
-            sprite.rect = pygame.Rect(block[0] * self.size, block[1] * self.size, self.size, self.size)
+            sprite.rect = pygame.Rect(block[0] * self.size + self.pivot[0], block[1] * self.size + self.pivot[1], self.size, self.size)
             sprite.image = image
             sprite.add(self)
         return self
@@ -85,26 +88,53 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
                 sprite.rect.left += self.size
 
     def rotate(self):
+        # previous set of blocks base positions
+        previous_positions = self.blocks
+        # get current position
+        positions = list()
+        for sprite in self.sprites():
+            positions.append((sprite.rect.left / self.size, sprite.rect.top / self.size))
+        # empty sprite list
         self.empty()
-        self.setBlocks(next(self.blocks))
+        # get next set of blocks
+        self.setBlocks(next(self.blocks_cycle))
+        new_positions = self.blocks
+        # set new calculated positions
+        for index, sprite in enumerate(self.sprites()):
+            sprite.rect.left = (positions[index][0] - previous_positions[index][0] + new_positions[index][0]) * self.size
+            sprite.rect.top = (positions[index][1] - previous_positions[index][1] + new_positions[index][1]) * self.size
+        if self.isColliding():
+            left = min(sprite.rect.left for sprite in self.sprites()) / self.size
+            if left < 0:
+                for i in range(0, left * - 1):
+                    self.moveRight()
+            right = max(sprite.rect.right for sprite in self.sprites()) / self.size
+            if right > 10:
+                for i in range(0, right - 10):
+                    self.moveLeft()
+        return True
 
-    def isColliding(self, zone_sprites_groups, zone_bottom, zone_left, zone_right):
+    def isColliding(self):
         # Test collisions between sprites
-        for group in zone_sprites_groups:
+        for group in self.zone.sprites:
             if pygame.sprite.groupcollide(group, self, False, False):
                 return True
         # Test collisions with boundaries
+        zone = self.zone.get_rect()
         bottom = max(sprite.rect.bottom for sprite in self.sprites())
-        if bottom > zone_bottom:
+        if bottom > zone.bottom:
             return True
         left = min(sprite.rect.left for sprite in self.sprites())
-        if left < zone_left:
+        if left < zone.left:
             return True
         right = max(sprite.rect.right for sprite in self.sprites())
-        if right > zone_right:
+        if right > zone.right:
             return True
 
     def center(self, width):
+        top = min(sprite.rect.top for sprite in self.sprites()) / self.size
+        if top > 0:
+            self.moveUp()
         groupwidth = max(sprite.rect.right for sprite in self.sprites()) / self.size
         zonecenter = (width / self.size) / 2
         start = zonecenter - int(math.ceil(float(groupwidth) / 2))
