@@ -8,6 +8,10 @@ from lib.zone import Zone
 
 pygame.init()
 
+# Init config
+config = {}
+execfile("controls.conf", config)
+
 modes = pygame.display.list_modes()
 mode = modes[-1]
 # Running in smallest mode
@@ -205,28 +209,28 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key in (pygame.K_ESCAPE, pygame.K_q):
                 running = False
-            if event.key == pygame.K_LEFT:
+            if event.key == config['KEY_LEFT']:
                 L.moveLeft()
                 if L.isColliding():
                     L.moveRight()
                 else:
                     L.clear(zone)
                     L.draw(zone)
-            if event.key == pygame.K_RIGHT:
+            if event.key == config['KEY_RIGHT']:
                 L.moveRight()
                 if L.isColliding():
                     L.moveLeft()
                 else:
                     L.clear(zone)
                     L.draw(zone)
-            if event.key == pygame.K_DOWN:
+            if event.key == config['KEY_DOWN']:
                 L.moveDown()
                 if L.isColliding():
                     L.moveUp()
                 else:
                     L.clear(zone)
                     L.draw(zone)
-            if event.key == pygame.K_SPACE:
+            if event.key == config['KEY_ROTATE']:
                 if L.rotate():
                     sounds["rotate"].play()
                     L.clear(zone)
