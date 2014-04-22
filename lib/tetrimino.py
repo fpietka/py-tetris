@@ -17,7 +17,8 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         # XXX maybe have 3 separate parameters in init
         self.setName(definition['name'])
         self.setColor(definition['color'])
-        self.blocks_cycle = cycle(definition['blocks'])
+        self.all_blocks = definition['blocks']
+        self.blocks_cycle = cycle(self.all_blocks)
         self.size = size
         self.pivot = (0, 0)
         self.setBlocks(next(self.blocks_cycle))
