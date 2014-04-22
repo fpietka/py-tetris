@@ -88,7 +88,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
             for sprite in self.sprites():
                 sprite.rect.left += self.size
 
-    def rotate(self):
+    def rotate(self, test_collision=True):
         # previous set of blocks base positions
         previous_positions = self.blocks
         # get current position
@@ -104,7 +104,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         for index, sprite in enumerate(self.sprites()):
             sprite.rect.left = (positions[index][0] - previous_positions[index][0] + new_positions[index][0]) * self.size
             sprite.rect.top = (positions[index][1] - previous_positions[index][1] + new_positions[index][1]) * self.size
-        if self.isColliding():
+        if test_collision and self.isColliding():
             # handle zone collisions
             if self.colliding == 'left':
                 left = min(sprite.rect.left for sprite in self.sprites()) / self.size
@@ -118,7 +118,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
                         self.moveLeft()
             # handle sprite group collisions
             for x in range(1, len(self.all_blocks)):
-                self.rotate()
+                self.rotate(False)
             # use previous positions
             for index, sprite in enumerate(self.sprites()):
                 sprite.rect.left = positions[index][0] * self.size
