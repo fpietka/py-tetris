@@ -105,14 +105,17 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
             sprite.rect.left = (positions[index][0] - previous_positions[index][0] + new_positions[index][0]) * self.size
             sprite.rect.top = (positions[index][1] - previous_positions[index][1] + new_positions[index][1]) * self.size
         if self.isColliding():
-            left = min(sprite.rect.left for sprite in self.sprites()) / self.size
-            if left < 0:
-                for i in range(0, left * - 1):
-                    self.moveRight()
-            right = max(sprite.rect.right for sprite in self.sprites()) / self.size
-            if right > 10:
-                for i in range(0, right - 10):
-                    self.moveLeft()
+            # handle zone collisions
+            if self.colliding == 'left':
+                left = min(sprite.rect.left for sprite in self.sprites()) / self.size
+                if left < 0:
+                    for i in range(0, left * - 1):
+                        self.moveRight()
+            elif self.colliding == 'right':
+                right = max(sprite.rect.right for sprite in self.sprites()) / self.size
+                if right > 10:
+                    for i in range(0, right - 10):
+                        self.moveLeft()
         return True
 
     def isColliding(self):
@@ -124,13 +127,18 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         zone = self.zone.get_rect()
         bottom = max(sprite.rect.bottom for sprite in self.sprites())
         if bottom > zone.bottom:
+            self.colliding = 'bottom'
             return True
         left = min(sprite.rect.left for sprite in self.sprites())
         if left < zone.left:
+            self.colliding = 'left'
             return True
         right = max(sprite.rect.right for sprite in self.sprites())
         if right > zone.right:
+            self.colliding = 'right'
             return True
+        self.colliding = None
+        return False
 
     def center(self, width):
         top = min(sprite.rect.top for sprite in self.sprites()) / self.size
