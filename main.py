@@ -230,11 +230,17 @@ while running:
                 else:
                     L.clear(zone)
                     L.draw(zone)
-            if event.key == config['KEY_ROTATE']:
+            if event.key in config['KEY_ROTATE_RIGHT']:
                 if L.rotate():
                     sounds["rotate"].play()
                     L.clear(zone)
                     L.draw(zone)
+            if event.key == config['KEY_HARD_DROP']:
+                while not L.isColliding():
+                    L.moveDown()
+                L.moveUp()
+                L.clear(zone)
+                L.draw(zone)
 
         if event.type == FALLEVENT:
             L.moveDown()
