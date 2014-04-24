@@ -19,26 +19,10 @@ class Zone(pygame.Surface):
                     lines[block.rect.top]['sprites'] = list()
                     lines[block.rect.top]['sprites'].append(block)
 
-        empty_lines = list()
-        for line, details in lines.iteritems():
-            if details['count'] == 10:
-                for sprite in details['sprites']:
-                    group = pygame.sprite.Group()
-                    group.add(sprite)
-                    group.clear(self, self.background)
-                    sprite.kill()
-                    # XXX sprite is gone, but we need to erase the line
-                    #       then move every other sprites down
-                    #sprite.clear(self, self.background)
-                    empty_lines.append(line)
-
+        empty_lines = [(line / self.block_size, details['sprites']) for line, details in lines.iteritems() if details['count'] == 10]
         if empty_lines:
             self.blit(self.background, (0, 0))
-
-        for empty_line in empty_lines:
-            for line, details in lines.iteritems():
-                if line > empty_line:
-                    for sprite in details['sprites']:
-                        sprite.rect.top -= self.block_size
-                        self.draw(sprite)
-
+            for sprite in empty_lines[0][1]:
+                sprite.kill()
+        for sprite in self.sprites:
+            sprite.draw(self)
