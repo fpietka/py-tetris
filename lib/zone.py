@@ -25,4 +25,9 @@ class Zone(pygame.Surface):
             for sprite in empty_line[1]:
                 sprite.kill()
         for sprite in self.sprites:
+            for block in sprite.sprites():
+                for empty_line in empty_lines:
+                    if block.rect.top / self.block_size < empty_line[0]:
+                        block.rect.top += self.block_size
+        for sprite in self.sprites:
             sprite.draw(self)
