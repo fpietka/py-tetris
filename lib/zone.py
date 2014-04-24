@@ -20,9 +20,9 @@ class Zone(pygame.Surface):
                     lines[block.rect.top]['sprites'].append(block)
 
         empty_lines = [(line / self.block_size, details['sprites']) for line, details in lines.iteritems() if details['count'] == 10]
-        if empty_lines:
+        for empty_line in empty_lines:
             self.blit(self.background, (0, 0))
-            for sprite in empty_lines[0][1]:
+            for sprite in empty_line[1]:
                 sprite.kill()
         for sprite in self.sprites:
             sprite.draw(self)
