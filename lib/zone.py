@@ -46,3 +46,7 @@ class Zone(pygame.Surface):
             # redraw sprites
             for sprite in self.sprites:
                 sprite.draw(self)
+            if len(empty_lines) == 4:
+                self.sounds["tetris"].play()
+            else:
+                self.sounds["line"].play()
