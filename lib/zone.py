@@ -24,10 +24,14 @@ class Zone(pygame.Surface):
             self.blit(self.background, (0, 0))
             for sprite in empty_line[1]:
                 sprite.kill()
+        move_down_blocks = list()
         for sprite in self.sprites:
             for block in sprite.sprites():
                 for empty_line in empty_lines:
                     if block.rect.top / self.block_size < empty_line[0]:
-                        block.rect.top += self.block_size
+                        move_down_blocks.append(block)
+        for block in move_down_blocks:
+            block.rect.top += self.block_size
+
         for sprite in self.sprites:
             sprite.draw(self)
