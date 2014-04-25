@@ -39,6 +39,7 @@ class Zone(pygame.Surface):
         for block in move_down_blocks:
             block.rect.top += self.block_size
 
-        # redraw sprites
-        for sprite in self.sprites:
-            sprite.draw(self)
+        if empty_lines:
+            # redraw sprites
+            for sprite in self.sprites:
+                sprite.draw(self)
