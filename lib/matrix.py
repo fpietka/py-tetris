@@ -6,8 +6,8 @@ class Matrix(pygame.Surface):
         pygame.draw.rect(self, (255, 255, 255), self.get_rect(), 1)
         self.sprites = list()
         self.sounds = dict()
-        self.sounds["line"] = pygame.mixer.Sound("../res/line.wav")
-        self.sounds["tetris"] = pygame.mixer.Sound("../res/tetris.wav")
+        self.sounds["line"] = pygame.mixer.Sound("res/line.wav")
+        self.sounds["tetris"] = pygame.mixer.Sound("res/tetris.wav")
 
     def checkLines(self):
         lines = dict()
