@@ -4,7 +4,7 @@ import pygame
 import random
 
 from lib.tetrimino import Tetrimino
-from lib.zone import Zone
+from lib.matrix import Matrix
 
 pygame.init()
 
@@ -42,15 +42,15 @@ Z_WIDTH = Z_HEIGHT / 2
 
 B_SIZE = Z_WIDTH / 10
 
-zone = Zone((Z_WIDTH, Z_HEIGHT))
+matrix = Matrix((Z_WIDTH, Z_HEIGHT))
 
-background = zone.copy()
-zone.background = background
-zone.block_size = B_SIZE
+background = matrix.copy()
+matrix.background = background
+matrix.block_size = B_SIZE
 
-Z_LEFT = screen.get_width() / 2 - zone.get_width() / 2
+Z_LEFT = screen.get_width() / 2 - matrix.get_width() / 2
 
-screen.blit(zone, (Z_LEFT, 0))
+screen.blit(matrix, (Z_LEFT, 0))
 
 F_TIME = 500
 
@@ -189,10 +189,10 @@ tetriminos_definitions = (
 )
 
 
-L = Tetrimino(tetriminos_definitions[2], B_SIZE, background, zone)
+L = Tetrimino(tetriminos_definitions[2], B_SIZE, background, matrix)
 L.center(Z_WIDTH)
-L.draw(zone)
-screen.blit(zone, (Z_LEFT, 0))
+L.draw(matrix)
+screen.blit(matrix, (Z_LEFT, 0))
 pygame.display.update()
 
 FALLEVENT = pygame.USEREVENT + 1
@@ -216,48 +216,48 @@ while running:
                 if L.isColliding():
                     L.moveRight()
                 else:
-                    L.clear(zone)
-                    L.draw(zone)
+                    L.clear(matrix)
+                    L.draw(matrix)
             if event.key == config['KEY_RIGHT']:
                 L.moveRight()
                 if L.isColliding():
                     L.moveLeft()
                 else:
-                    L.clear(zone)
-                    L.draw(zone)
+                    L.clear(matrix)
+                    L.draw(matrix)
             if event.key == config['KEY_DOWN']:
                 L.moveDown()
                 if L.isColliding():
                     L.moveUp()
                 else:
-                    L.clear(zone)
-                    L.draw(zone)
+                    L.clear(matrix)
+                    L.draw(matrix)
             if event.key in config['KEY_ROTATE_RIGHT']:
                 if L.rotate():
                     sounds["rotate"].play()
-                    L.clear(zone)
-                    L.draw(zone)
+                    L.clear(matrix)
+                    L.draw(matrix)
             if event.key == config['KEY_HARD_DROP']:
                 while not L.isColliding():
                     L.moveDown()
                 L.moveUp()
-                L.clear(zone)
-                L.draw(zone)
+                L.clear(matrix)
+                L.draw(matrix)
 
         if event.type == FALLEVENT:
             L.moveDown()
             if L.isColliding():
                 sounds["fall"].play()
                 L.moveUp()
-                zone.sprites.append(L)
-                L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background, zone)
+                matrix.sprites.append(L)
+                L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background, matrix)
                 L.center(Z_WIDTH)
-                zone.checkLines()
-                L.draw(zone)
+                matrix.checkLines()
+                L.draw(matrix)
             else:
-                L.clear(zone)
-                L.draw(zone)
-    screen.blit(zone, (Z_LEFT, 0))
+                L.clear(matrix)
+                L.draw(matrix)
+    screen.blit(matrix, (Z_LEFT, 0))
 
     pygame.display.update()
 

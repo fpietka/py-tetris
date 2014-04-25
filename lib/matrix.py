@@ -1,8 +1,8 @@
 import pygame
 
-class Zone(pygame.Surface):
+class Matrix(pygame.Surface):
     def __init__(self, *args):
-        super(Zone, self).__init__(*args)
+        super(Matrix, self).__init__(*args)
         pygame.draw.rect(self, (255, 255, 255), self.get_rect(), 1)
         self.sprites = list()
         self.sounds = dict()
@@ -27,7 +27,7 @@ class Zone(pygame.Surface):
 
         empty_lines = [(line / self.block_size, details['sprites']) for line, details in lines.iteritems() if details['count'] == 10]
         for empty_line in empty_lines:
-            # clear zone
+            # clear matrix
             self.blit(self.background, (0, 0))
             for sprite in empty_line[1]:
                 sprite.kill()
