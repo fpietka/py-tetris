@@ -89,17 +89,17 @@ tetriminos_definitions = (
             (1, 0),
             (2, 0),
             (2, 1)
-        ),(
+        ), (
             (2, 0),
             (2, 1),
             (2, 2),
             (1, 2)
-        ),(
+        ), (
             (0, 1),
             (0, 2),
             (1, 2),
             (2, 2)
-        ),(
+        ), (
             (0, 0),
             (1, 0),
             (0, 1),
@@ -114,17 +114,17 @@ tetriminos_definitions = (
             (1, 2),
             (2, 2),
             (2, 1)
-        ),(
+        ), (
             (0, 0),
             (0, 1),
             (0, 2),
             (1, 2)
-        ),(
+        ), (
             (0, 0),
             (0, 1),
             (1, 0),
             (2, 0)
-        ),(
+        ), (
             (2, 0),
             (2, 1),
             (2, 2),
@@ -139,7 +139,7 @@ tetriminos_definitions = (
             (0, 1),
             (1, 1),
             (2, 0)
-        ),(
+        ), (
             (1, 1),
             (1, 0),
             (2, 1),
@@ -154,22 +154,22 @@ tetriminos_definitions = (
             (1, 1),
             (1, 2),
             (2, 2)
-        ),(
+        ), (
             (0, 0),
             (0, 1),
             (1, 1),
             (0, 2)
-        ),(
+        ), (
             (0, 0),
             (1, 0),
             (1, 1),
             (2, 0)
-        ),(
+        ), (
             (2, 0),
             (1, 1),
             (2, 1),
             (2, 2)
-        ),)
+        ))
     },
     {
         'name': 'Z',
@@ -179,7 +179,7 @@ tetriminos_definitions = (
             (0, 0),
             (1, 1),
             (2, 1)
-        ),(
+        ), (
             (1, 1),
             (1, 0),
             (0, 1),
@@ -250,7 +250,12 @@ while running:
                 sounds["fall"].play()
                 L.moveUp()
                 matrix.sprites.append(L)
-                L = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background, matrix)
+                L = Tetrimino(
+                    random.choice(tetriminos_definitions),
+                    B_SIZE,
+                    background,
+                    matrix
+                )
                 L.center(Z_WIDTH)
                 matrix.checkLines()
                 L.draw(matrix)
