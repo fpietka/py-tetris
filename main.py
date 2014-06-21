@@ -6,6 +6,7 @@ import random
 from lib.tetrimino import Tetrimino
 from lib.matrix import Matrix
 
+pygame.mixer.pre_init(44100, -16, 1, 512)
 pygame.init()
 pygame.mouse.set_visible(False)
 
