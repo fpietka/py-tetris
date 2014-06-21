@@ -7,6 +7,7 @@ from lib.tetrimino import Tetrimino
 from lib.matrix import Matrix
 
 pygame.init()
+pygame.mouse.set_visible(False)
 
 # Init config
 config = {}
