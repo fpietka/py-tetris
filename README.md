@@ -1,3 +1,5 @@
+[![Build Status](https://scrutinizer-ci.com/g/fpietka/py-tetris/badges/build.png?b=master)](https://scrutinizer-ci.com/g/fpietka/py-tetris/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fpietka/py-tetris/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fpietka/py-tetris/?branch=master)
+
 # Tetris clone with Pygame
 
 Informational sources:
