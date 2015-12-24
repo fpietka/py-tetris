@@ -2,6 +2,8 @@
 
 # Tetris clone with Pygame
 
+![py-tetris](docs/py-tetris.png "py-tetris")
+
 Informational sources:
 * [Tetriminos](http://strategywiki.org/wiki/Tetris_Party/Tetriminos)
 * [Controls](http://www.tetrisfriends.com/help/tips_appendix.php#controls)
