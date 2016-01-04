@@ -33,11 +33,17 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         """Build sprites group"""
         # use first block to draw an image
         self.blocks = blocks
-        block = pygame.Rect(blocks[0][0] * self.size, blocks[0][1] * self.size, self.size, self.size)
+        block = pygame.Rect(blocks[0][0] * self.size,
+                            blocks[0][1] * self.size,
+                            self.size,
+                            self.size)
         image = self.buildImage(block)
         for block in blocks:
             sprite = pygame.sprite.Sprite()
-            sprite.rect = pygame.Rect(block[0] * self.size + self.pivot[0], block[1] * self.size + self.pivot[1], self.size, self.size)
+            sprite.rect = pygame.Rect(block[0] * self.size + self.pivot[0],
+                                      block[1] * self.size + self.pivot[1],
+                                      self.size,
+                                      self.size)
             sprite.image = image
             sprite.add(self)
         return self
@@ -46,7 +52,10 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         block.top, block.left = 0, 0
         image = pygame.Surface(block.size)
         # inner block is a little smaller
-        innerblock = pygame.Rect(self.outline, self.outline, block.size[0] - self.outline * 2, block.size[1] - self.outline * 2)
+        innerblock = pygame.Rect(self.outline,
+                                 self.outline,
+                                 block.size[0] - self.outline * 2,
+                                 block.size[1] - self.outline * 2)
         pygame.draw.rect(image, self.color, innerblock, self.outline)
         return image
 
@@ -94,7 +103,8 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         # get current position
         positions = list()
         for sprite in self.sprites():
-            positions.append((sprite.rect.left / self.size, sprite.rect.top / self.size))
+            positions.append((sprite.rect.left / self.size,
+                              sprite.rect.top / self.size))
         # empty sprite list
         self.empty()
         # get next set of blocks
@@ -102,17 +112,23 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         new_positions = self.blocks
         # set new calculated positions
         for index, sprite in enumerate(self.sprites()):
-            sprite.rect.left = (positions[index][0] - previous_positions[index][0] + new_positions[index][0]) * self.size
-            sprite.rect.top = (positions[index][1] - previous_positions[index][1] + new_positions[index][1]) * self.size
+            sprite.rect.left = (positions[index][0] -
+                                previous_positions[index][0] +
+                                new_positions[index][0]) * self.size
+            sprite.rect.top = (positions[index][1] -
+                               previous_positions[index][1] +
+                               new_positions[index][1]) * self.size
         if test_collision and self.isColliding():
             # handle zone collisions
             if self.colliding == 'left':
-                left = min(sprite.rect.left for sprite in self.sprites()) / self.size
+                left = min(sprite.rect.left for sprite
+                           in self.sprites()) / self.size
                 if left < 0:
                     for i in range(0, left * - 1):
                         self.moveRight()
             elif self.colliding == 'right':
-                right = max(sprite.rect.right for sprite in self.sprites()) / self.size
+                right = max(sprite.rect.right for sprite
+                            in self.sprites()) / self.size
                 if right > 10:
                     for i in range(0, right - 10):
                         self.moveLeft()
@@ -152,7 +168,8 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         top = min(sprite.rect.top for sprite in self.sprites()) / self.size
         if top > 0:
             self.moveUp()
-        groupwidth = max(sprite.rect.right for sprite in self.sprites()) / self.size
+        groupwidth = max(sprite.rect.right for sprite
+                         in self.sprites()) / self.size
         zonecenter = (width / self.size) / 2
         start = zonecenter - int(math.ceil(float(groupwidth) / 2))
         for sprite in self.sprites():

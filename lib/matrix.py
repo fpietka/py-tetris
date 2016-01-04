@@ -1,5 +1,6 @@
 import pygame
 
+
 class Matrix(pygame.Surface):
     def __init__(self, *args):
         super(Matrix, self).__init__(*args)
@@ -25,7 +26,10 @@ class Matrix(pygame.Surface):
                     lines[block.rect.top]['sprites'] = list()
                     lines[block.rect.top]['sprites'].append(block)
 
-        empty_lines = [(line / self.block_size, details['sprites']) for line, details in lines.iteritems() if details['count'] == 10]
+        empty_lines = [(line / self.block_size, details['sprites'])
+                       for line, details
+                       in lines.iteritems()
+                       if details['count'] == 10]
         for empty_line in empty_lines:
             # clear matrix
             self.blit(self.background, (0, 0))
