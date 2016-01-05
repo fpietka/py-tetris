@@ -49,7 +49,7 @@ class Matrix(pygame.Surface):
 
         score = 0
         if empty_lines:
-            score = self.scores(len(empty_lines))
+            score = self.scores[len(empty_lines) - 1]
 
             # redraw sprites
             for sprite in self.sprites:
