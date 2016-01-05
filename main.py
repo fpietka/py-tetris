@@ -39,6 +39,7 @@ M_CW = 0
 M_CCW = 1
 motions = (M_CW, M_CCW)
 
+SCREEN_WIDTH, SCREEN_HEIGHT = screen.get_size()
 Z_WIDTH, Z_HEIGHT = screen.get_size()
 Z_WIDTH = Z_HEIGHT / 2
 
