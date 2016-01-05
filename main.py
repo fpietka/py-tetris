@@ -236,6 +236,10 @@ pygame.display.update()
 FALLEVENT = pygame.USEREVENT + 1
 pygame.time.set_timer(FALLEVENT, SPEEDS[0])
 
+lines = 0
+score = 0
+level = 0
+
 # sounds
 sounds = dict()
 sounds["rotate"] = pygame.mixer.Sound("res/rotate.wav")
@@ -295,7 +299,16 @@ while running:
                     matrix
                 )
                 L.center(Z_WIDTH)
-                matrix.checkLines()
+                empty_lines, points = matrix.checkLines()
+
+                if empty_lines:
+                    # calculcate
+                    lines += empty_lines
+                    score += points * (level + 1)
+                    level = int(lines / 10)
+
+                    pygame.time.set_timer(FALLEVENT, SPEEDS[level])
+
                 L.draw(matrix)
             else:
                 L.clear(matrix)
