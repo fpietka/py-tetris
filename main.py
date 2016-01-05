@@ -55,8 +55,43 @@ Z_LEFT = screen.get_width() / 2 - matrix.get_width() / 2
 
 screen.blit(matrix, (Z_LEFT, 0))
 
-F_TIME = 500
+"""
+Handle speed:
+    Level, Frames/drop, Period (sec/drop), Speed (drops/sec)
+    ---------------------
+    0,    48, .799,  1.25
+    1,    43, .715,  1.40
+    2,    38, .632,  1.58
+    3,    33, .549,  1.82
+    4,    28, .466,  2.15
+    5,    23, .383,  2.61
+    6,    18, .300,  3.34
+    7,    13, .216,  4.62
+    8,     8, .133,  7.51
+    9,     6, .100, 10.02
+    10-12, 5, .083, 12.02
+    13-15, 4, .067, 15.05
+    16-18, 3, .050, 20.03
+    19-28, 2, .033, 30.05
+    29+,   1, .017, 60.10
 
+"""
+SPEEDS = (
+        799,
+        715,
+        632,
+        549,
+        466,
+        383,
+        300,
+        216,
+        133,
+        100,
+        83,
+        67,
+        50,
+        33,
+        17)
 
 tetriminos_definitions = (
     {
@@ -199,7 +234,7 @@ screen.blit(matrix, (Z_LEFT, 0))
 pygame.display.update()
 
 FALLEVENT = pygame.USEREVENT + 1
-pygame.time.set_timer(FALLEVENT, F_TIME)
+pygame.time.set_timer(FALLEVENT, SPEEDS[0])
 
 # sounds
 sounds = dict()
