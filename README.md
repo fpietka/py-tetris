@@ -14,3 +14,5 @@ Informational sources:
 Sound resources:
 * [DrPetter's sfxr](http://www.drpetter.se/project_sfxr.html)
 
+Font resource:
+* [Blockhead](http://www.dafont.com/fr/blockhead-ns.font) by nicshackle
