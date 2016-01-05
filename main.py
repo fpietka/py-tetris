@@ -93,6 +93,15 @@ SPEEDS = (
         33,
         17)
 
+myfont = pygame.font.Font("res/Blockhead.otf", 40)
+
+level_label = myfont.render("LEVEL: {}".format(0), True, white)
+score_label = myfont.render("Score: {}".format(0), True, white)
+line_label = myfont.render("Lines: {}".format(0), True, white)
+screen.blit(level_label, (SCREEN_WIDTH - 180, 50))
+screen.blit(score_label, (SCREEN_WIDTH - 180, 100))
+screen.blit(line_label, (SCREEN_WIDTH - 180, 150))
+
 tetriminos_definitions = (
     {
         'name': 'O',
@@ -302,12 +311,24 @@ while running:
                 empty_lines, points = matrix.checkLines()
 
                 if empty_lines:
-                    # calculcate
+                    # calculcate and display
                     lines += empty_lines
                     score += points * (level + 1)
                     level = int(lines / 10)
 
                     pygame.time.set_timer(FALLEVENT, SPEEDS[level])
+
+                level_label = myfont.render("LEVEL: {}".format(level + 1), True, white)
+                score_label = myfont.render("Score: {}".format(score), True, white)
+                line_label = myfont.render("Lines: {}".format(lines), True, white)
+
+                # reset score zone
+                rect = pygame.Rect(SCREEN_WIDTH - 180, 0, SCREEN_WIDTH, 200)
+                screen.fill(black, rect)
+
+                screen.blit(level_label, (SCREEN_WIDTH - 180, 50))
+                screen.blit(score_label, (SCREEN_WIDTH - 180, 100))
+                screen.blit(line_label, (SCREEN_WIDTH - 180, 150))
 
                 L.draw(matrix)
             else:
