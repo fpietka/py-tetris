@@ -9,6 +9,7 @@ class Matrix(pygame.Surface):
         self.sounds = dict()
         self.sounds["line"] = pygame.mixer.Sound("res/line.wav")
         self.sounds["tetris"] = pygame.mixer.Sound("res/tetris.wav")
+        self.scores = (40, 100, 300, 1200)
 
     def checkLines(self):
         lines = dict()
@@ -46,7 +47,10 @@ class Matrix(pygame.Surface):
         for block in move_down_blocks:
             block.rect.top += self.block_size
 
+        score = 0
         if empty_lines:
+            score = self.scores(len(empty_lines))
+
             # redraw sprites
             for sprite in self.sprites:
                 sprite.draw(self)
@@ -54,3 +58,4 @@ class Matrix(pygame.Surface):
                 self.sounds["tetris"].play()
             else:
                 self.sounds["line"].play()
+        return len(empty_lines), score
