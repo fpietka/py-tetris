@@ -9,6 +9,8 @@ Informational sources:
 * [Controls](http://www.tetrisfriends.com/help/tips_appendix.php#controls)
 * [Terms](http://www.tetrisfriends.com/help/tips_appendix.php#tetristerminology)
 * [Mechanics](http://meatfighter.com/nintendotetrisai/)
+* [Mechanics 2](http://www.colinfahey.com/tetris/tetris.html)
 
 Sound resources:
 * [DrPetter's sfxr](http://www.drpetter.se/project_sfxr.html)
+
