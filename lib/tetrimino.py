@@ -124,16 +124,16 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
                 left = min(sprite.rect.left for sprite
                            in self.sprites()) / self.size
                 if left < 0:
-                    for i in range(0, left * - 1):
+                    for _ in range(0, left * - 1):
                         self.moveRight()
             elif self.colliding == 'right':
                 right = max(sprite.rect.right for sprite
                             in self.sprites()) / self.size
                 if right > 10:
-                    for i in range(0, right - 10):
+                    for _ in range(0, right - 10):
                         self.moveLeft()
             # handle sprite group collisions
-            for x in range(1, len(self.all_blocks)):
+            for _ in range(1, len(self.all_blocks)):
                 self.rotate(False)
             # use previous positions
             for index, sprite in enumerate(self.sprites()):
