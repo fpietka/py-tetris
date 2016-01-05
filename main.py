@@ -248,6 +248,8 @@ pygame.time.set_timer(FALLEVENT, SPEEDS[0])
 lines = 0
 score = 0
 level = 0
+softdrops = 0
+harddrops = 0
 
 # sounds
 sounds = dict()
@@ -281,6 +283,7 @@ while running:
                 if L.isColliding():
                     L.moveUp()
                 else:
+                    softdrops += 1
                     L.clear(matrix)
                     L.draw(matrix)
             if event.key in config['KEY_ROTATE_RIGHT']:
@@ -290,8 +293,10 @@ while running:
                     L.draw(matrix)
             if event.key == config['KEY_HARD_DROP']:
                 while not L.isColliding():
+                    harddrops += 1
                     L.moveDown()
                 L.moveUp()
+                harddrops -= 1
                 L.clear(matrix)
                 L.draw(matrix)
 
@@ -309,6 +314,11 @@ while running:
                 )
                 L.center(Z_WIDTH)
                 empty_lines, points = matrix.checkLines()
+
+                score += softdrops
+                score += (harddrops * 2)
+                harddrops = 0
+                softdrops = 0
 
                 if empty_lines:
                     # calculcate and display
