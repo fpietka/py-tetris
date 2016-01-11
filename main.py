@@ -2,6 +2,7 @@
 
 import pygame
 import random
+from itertools import cycle
 
 from lib.tetrimino import Tetrimino
 from lib.matrix import Matrix
@@ -245,6 +246,11 @@ pygame.display.update()
 FALLEVENT = pygame.USEREVENT + 1
 pygame.time.set_timer(FALLEVENT, SPEEDS[0])
 
+PAUSEEVENT = pygame.USEREVENT + 2
+pause_font_size = myfont.size("PAUSED")
+pause_label = myfont.render("PAUSED", False, white)
+
+PAUSE = False
 lines = 0
 score = 0
 level = 0
@@ -264,6 +270,26 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key in (pygame.K_ESCAPE, pygame.K_q):
                 running = False
+            if event.key == pygame.K_p:
+                if PAUSE:
+                    pygame.time.set_timer(PAUSEEVENT, 0)
+                    matrix = game_matrix
+                    PAUSE = False
+                else:
+                    pygame.time.set_timer(PAUSEEVENT, 1000)
+                    PAUSE = True
+
+                    game_matrix = matrix
+                    unpaused_matrix = matrix.copy()
+                    paused_matrix = matrix.copy()
+
+                    paused_matrix.blit(pause_label, ((Z_WIDTH / 2) - (pause_font_size[0] / 2), (Z_HEIGHT / 2) - pause_font_size[1]))
+                    pause_matrix = cycle((paused_matrix, unpaused_matrix))
+
+                    matrix = pause_matrix.next()
+            if PAUSE:
+                # do not process any further key
+                continue
             if event.key == config['KEY_LEFT']:
                 tetrimino.moveLeft()
                 if tetrimino.isColliding():
@@ -299,6 +325,12 @@ while running:
                 harddrops -= 1
                 tetrimino.clear(matrix)
                 tetrimino.draw(matrix)
+
+        if event.type == PAUSEEVENT:
+            matrix = pause_matrix.next()
+
+        if PAUSE:
+            continue
 
         if event.type == FALLEVENT:
             tetrimino.moveDown()
