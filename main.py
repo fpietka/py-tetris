@@ -236,9 +236,9 @@ tetriminos_definitions = (
 )
 
 
-L = Tetrimino(tetriminos_definitions[2], B_SIZE, background, matrix)
-L.center(Z_WIDTH)
-L.draw(matrix)
+tetrimino = Tetrimino(tetriminos_definitions[2], B_SIZE, background, matrix)
+tetrimino.center(Z_WIDTH)
+tetrimino.draw(matrix)
 screen.blit(matrix, (Z_LEFT, 0))
 pygame.display.update()
 
@@ -265,54 +265,54 @@ while running:
             if event.key in (pygame.K_ESCAPE, pygame.K_q):
                 running = False
             if event.key == config['KEY_LEFT']:
-                L.moveLeft()
-                if L.isColliding():
-                    L.moveRight()
+                tetrimino.moveLeft()
+                if tetrimino.isColliding():
+                    tetrimino.moveRight()
                 else:
-                    L.clear(matrix)
-                    L.draw(matrix)
+                    tetrimino.clear(matrix)
+                    tetrimino.draw(matrix)
             if event.key == config['KEY_RIGHT']:
-                L.moveRight()
-                if L.isColliding():
-                    L.moveLeft()
+                tetrimino.moveRight()
+                if tetrimino.isColliding():
+                    tetrimino.moveLeft()
                 else:
-                    L.clear(matrix)
-                    L.draw(matrix)
+                    tetrimino.clear(matrix)
+                    tetrimino.draw(matrix)
             if event.key == config['KEY_DOWN']:
-                L.moveDown()
-                if L.isColliding():
-                    L.moveUp()
+                tetrimino.moveDown()
+                if tetrimino.isColliding():
+                    tetrimino.moveUp()
                 else:
                     softdrops += 1
-                    L.clear(matrix)
-                    L.draw(matrix)
+                    tetrimino.clear(matrix)
+                    tetrimino.draw(matrix)
             if event.key in config['KEY_ROTATE_RIGHT']:
-                if L.rotate():
+                if tetrimino.rotate():
                     sounds["rotate"].play()
-                    L.clear(matrix)
-                    L.draw(matrix)
+                    tetrimino.clear(matrix)
+                    tetrimino.draw(matrix)
             if event.key == config['KEY_HARD_DROP']:
-                while not L.isColliding():
+                while not tetrimino.isColliding():
                     harddrops += 1
-                    L.moveDown()
-                L.moveUp()
+                    tetrimino.moveDown()
+                tetrimino.moveUp()
                 harddrops -= 1
-                L.clear(matrix)
-                L.draw(matrix)
+                tetrimino.clear(matrix)
+                tetrimino.draw(matrix)
 
         if event.type == FALLEVENT:
-            L.moveDown()
-            if L.isColliding():
+            tetrimino.moveDown()
+            if tetrimino.isColliding():
                 sounds["fall"].play()
-                L.moveUp()
-                matrix.sprites.append(L)
-                L = Tetrimino(
+                tetrimino.moveUp()
+                matrix.sprites.append(tetrimino)
+                tetrimino = Tetrimino(
                     random.choice(tetriminos_definitions),
                     B_SIZE,
                     background,
                     matrix
                 )
-                L.center(Z_WIDTH)
+                tetrimino.center(Z_WIDTH)
                 empty_lines, points = matrix.checkLines()
 
                 score += softdrops
@@ -340,12 +340,12 @@ while running:
                 screen.blit(score_label, (SCREEN_WIDTH - 180, 75))
                 screen.blit(line_label, (SCREEN_WIDTH - 180, 100))
 
-                L.draw(matrix)
+                tetrimino.draw(matrix)
             else:
-                L.clear(matrix)
-                L.draw(matrix)
-    screen.blit(matrix, (Z_LEFT, 0))
+                tetrimino.clear(matrix)
+                tetrimino.draw(matrix)
 
+    screen.blit(matrix, (Z_LEFT, 0))
     pygame.display.update()
 
 print("Exiting game")
