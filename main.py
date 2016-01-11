@@ -337,6 +337,9 @@ while running:
             if tetrimino.isColliding():
                 sounds["fall"].play()
                 tetrimino.moveUp()
+                if tetrimino.isColliding():
+                    running = False
+                    continue
                 matrix.sprites.append(tetrimino)
                 tetrimino = Tetrimino(
                     random.choice(tetriminos_definitions),
@@ -380,4 +383,5 @@ while running:
     screen.blit(matrix, (Z_LEFT, 0))
     pygame.display.update()
 
+print("Score: {}".format(score))
 print("Exiting game")
