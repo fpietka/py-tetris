@@ -15,4 +15,4 @@ Sound resources:
 * [DrPetter's sfxr](http://www.drpetter.se/project_sfxr.html)
 
 Font resource:
-* [Blockhead](http://www.dafont.com/fr/blockhead-ns.font) by nicshackle
+* [VCR OSD Mono](http://www.dafont.com/vcr-osd-mono.font) by Riciery Leal
