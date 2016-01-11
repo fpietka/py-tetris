@@ -236,7 +236,7 @@ tetriminos_definitions = (
 )
 
 
-tetrimino = Tetrimino(tetriminos_definitions[2], B_SIZE, background, matrix)
+tetrimino = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background, matrix)
 tetrimino.center(Z_WIDTH)
 tetrimino.draw(matrix)
 screen.blit(matrix, (Z_LEFT, 0))
