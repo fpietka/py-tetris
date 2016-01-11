@@ -3,7 +3,7 @@ import pygame
 
 class Matrix(pygame.Surface):
     def __init__(self, *args):
-        super(Matrix, self).__init__(*args)
+        pygame.Surface.__init__(self, *args)
         pygame.draw.rect(self, (255, 255, 255), self.get_rect(), 1)
         self.sprites = list()
         self.sounds = dict()

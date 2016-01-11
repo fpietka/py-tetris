@@ -9,7 +9,7 @@ D_UP = 0
 
 class Tetrimino(pygame.sprite.OrderedUpdates):
     def __init__(self, definition, size, background, zone):
-        super(Tetrimino, self).__init__()
+        pygame.sprite.OrderedUpdates.__init__(self)
         self.blocks = list()
         self.color = white
         self.outline = 1
@@ -65,7 +65,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         return self
 
     def clear(self, zone):
-        super(Tetrimino, self).clear(zone, self.background)
+        pygame.sprite.OrderedUpdates.clear(self, zone, self.background)
 
     def moveUp(self):
         self._move('up')
