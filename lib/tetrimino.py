@@ -164,7 +164,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         self.colliding = None
         return False
 
-    def center(self, width):
+    def center(self, width, height=0):
         top = min(sprite.rect.top for sprite in self.sprites()) / self.size
         if top > 0:
             self.moveUp()
@@ -174,4 +174,5 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         start = zonecenter - int(math.ceil(float(groupwidth) / 2))
         for sprite in self.sprites():
             sprite.rect.left += (start * self.size)
+            sprite.rect.top += height
         return self
