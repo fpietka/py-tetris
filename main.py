@@ -383,5 +383,7 @@ while running:
     screen.blit(matrix, (Z_LEFT, 0))
     pygame.display.update()
 
+print("Level: {}".format(level))
 print("Score: {}".format(score))
+print("Lines: {}".format(lines))
 print("Exiting game")
