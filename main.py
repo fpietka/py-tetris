@@ -371,6 +371,11 @@ while running:
                                       SCREEN_HEIGHT / 2)
                 next_tetrimino.draw(screen)
 
+                if tetrimino.isColliding():
+                    # gameover
+                    running = False
+                    continue
+
                 empty_lines, points = matrix.checkLines()
 
                 score += softdrops
