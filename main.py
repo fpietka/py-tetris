@@ -103,6 +103,9 @@ screen.blit(level_label, (SCREEN_WIDTH - 180, 50))
 screen.blit(score_label, (SCREEN_WIDTH - 180, 75))
 screen.blit(line_label, (SCREEN_WIDTH - 180, 100))
 
+next_label = myfont.render("Next", False, white)
+screen.blit(next_label, (SCREEN_WIDTH - 120, 200))
+
 tetriminos_definitions = (
     {
         'name': 'O',
