@@ -48,6 +48,7 @@ B_SIZE = Z_WIDTH / 10
 
 matrix = Matrix((Z_WIDTH, Z_HEIGHT))
 
+full_background = screen.copy()
 background = matrix.copy()
 matrix.background = background
 matrix.block_size = B_SIZE
@@ -244,6 +245,12 @@ tetrimino = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background,
 tetrimino.center(Z_WIDTH)
 tetrimino.draw(matrix)
 screen.blit(matrix, (Z_LEFT, 0))
+
+next_random = random.choice(tetriminos_definitions)
+next_tetrimino = Tetrimino(next_random, B_SIZE, full_background, screen)
+next_tetrimino.center(SCREEN_WIDTH + Z_WIDTH * 2, SCREEN_HEIGHT / 2)
+next_tetrimino.draw(screen)
+
 pygame.display.update()
 
 FALLEVENT = pygame.USEREVENT + 1
@@ -345,12 +352,25 @@ while running:
                     continue
                 matrix.sprites.append(tetrimino)
                 tetrimino = Tetrimino(
-                    random.choice(tetriminos_definitions),
+                    next_random,
                     B_SIZE,
                     background,
                     matrix
                 )
                 tetrimino.center(Z_WIDTH)
+                # random next
+                next_tetrimino.clear(pygame.Surface((SCREEN_WIDTH - Z_WIDTH, SCREEN_HEIGHT)))
+                next_tetrimino.clear(screen)
+                next_random = random.choice(tetriminos_definitions)
+                next_tetrimino = Tetrimino(
+                        next_random,
+                        B_SIZE,
+                        full_background,
+                        screen)
+                next_tetrimino.center(SCREEN_WIDTH + Z_WIDTH * 2,
+                                      SCREEN_HEIGHT / 2)
+                next_tetrimino.draw(screen)
+
                 empty_lines, points = matrix.checkLines()
 
                 score += softdrops
