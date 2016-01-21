@@ -249,15 +249,16 @@ class Game():
         level_label = self.myfont.render("Level: {}".format(0), False, white)
         score_label = self.myfont.render("Score: {}".format(0), False, white)
         line_label = self.myfont.render("Lines: {}".format(0), False, white)
+        pause_font_size = self.myfont.size("PAUSED")
+        self.pause_position = ((self.Z_WIDTH / 2) - (pause_font_size[0] / 2),
+                               (self.Z_HEIGHT / 2) - pause_font_size[1])
+        self.pause_label = self.myfont.render("PAUSED", False, white)
         screen.blit(level_label, (self.SCREEN_WIDTH - 180, 50))
         screen.blit(score_label, (self.SCREEN_WIDTH - 180, 75))
         screen.blit(line_label, (self.SCREEN_WIDTH - 180, 100))
 
         next_label = self.myfont.render("Next", False, white)
         screen.blit(next_label, (self.SCREEN_WIDTH - 120, 200))
-
-        self.pause_font_size = self.myfont.size("PAUSED")
-        self.pause_label = self.myfont.render("PAUSED", False, white)
 
         PAUSE = False
         self.lines = 0
@@ -270,29 +271,30 @@ class Game():
 
         pygame.display.update()
 
+    def pause(self):
+        if self.paused:
+            pygame.time.set_timer(self.event.pause, 0)
+            self.matrix = self.game_matrix
+            self.paused = False
+        else:
+            pygame.time.set_timer(self.event.pause, 1000)
+            self.paused = True
+
+            self.game_matrix = self.matrix
+            unpaused_matrix = self.matrix.copy()
+            paused_matrix = self.matrix.copy()
+
+            paused_matrix.blit(self.pause_label, self.pause_position)
+            self.pause_matrix = cycle((paused_matrix, unpaused_matrix))
+
+            self.matrix = self.pause_matrix.next()
+
     def handleKey(self, key):
         tetrimino = self.tetrimino
         if key in (pygame.K_ESCAPE, pygame.K_q):
             self.running = False
         if key == pygame.K_p:
-            if self.paused:
-                pygame.time.set_timer(self.event.pause, 0)
-                self.matrix = self.game_matrix
-                self.paused = False
-            else:
-                pygame.time.set_timer(self.event.pause, 1000)
-                self.paused = True
-
-                self.game_matrix = self.matrix
-                unpaused_matrix = self.matrix.copy()
-                paused_matrix = self.matrix.copy()
-
-                paused_matrix.blit(self.pause_label,
-                                   ((self.Z_WIDTH / 2) - (self.pause_font_size[0] / 2),
-                                    (self.Z_HEIGHT / 2) - self.pause_font_size[1]))
-                self.pause_matrix = cycle((paused_matrix, unpaused_matrix))
-
-                self.matrix = self.pause_matrix.next()
+            self.pause()
         if self.paused:
             # do not process any further key
             return
