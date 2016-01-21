@@ -289,15 +289,8 @@ class Game():
 
             self.matrix = self.pause_matrix.next()
 
-    def handleKey(self, key):
+    def keypress(self, key):
         tetrimino = self.tetrimino
-        if key in (pygame.K_ESCAPE, pygame.K_q):
-            self.running = False
-        if key == pygame.K_p:
-            self.pause()
-        if self.paused:
-            # do not process any further key
-            return
         if key == self.config['KEY_LEFT']:
             tetrimino.moveLeft()
             if tetrimino.isColliding():
@@ -333,6 +326,17 @@ class Game():
             self.harddrops -= 1
             tetrimino.clear(self.matrix)
             tetrimino.draw(self.matrix)
+
+    def handleKey(self, key):
+        if key in (pygame.K_ESCAPE, pygame.K_q):
+            self.running = False
+        if key == pygame.K_p:
+            self.pause()
+        if self.paused:
+            # do not process any further key
+            return
+        elif key in self.config['P_KEYS']:
+            self.keypress(key)
 
     def handleFall(self):
         tetrimino = self.tetrimino
