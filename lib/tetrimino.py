@@ -8,7 +8,7 @@ D_UP = 0
 
 
 class Tetrimino(pygame.sprite.OrderedUpdates):
-    def __init__(self, definition, size, background, zone):
+    def __init__(self, definition, size, background, matrix):
         pygame.sprite.OrderedUpdates.__init__(self)
         self.blocks = list()
         self.color = white
@@ -23,7 +23,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         self.pivot = (0, 0)
         self.setBlocks(next(self.blocks_cycle))
         self.background = background
-        self.zone = zone
+        self.matrix = matrix
         self.isLocked = False
 
     def setName(self, name):
@@ -65,8 +65,8 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         self.color = color
         return self
 
-    def clear(self, zone):
-        pygame.sprite.OrderedUpdates.clear(self, zone, self.background)
+    def clear(self, matrix):
+        pygame.sprite.OrderedUpdates.clear(self, matrix, self.background)
 
     def moveUp(self):
         self._move('up')
@@ -150,7 +150,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
                                previous_positions[index][1] +
                                new_positions[index][1]) * self.size
         if test_collision and self.isColliding():
-            # handle zone collisions
+            # handle matrix collisions
             if self.colliding == 'left':
                 left = min(sprite.rect.left for sprite
                            in self.sprites()) / self.size
@@ -175,21 +175,21 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
 
     def isColliding(self):
         # Test collisions between sprites
-        for group in self.zone.sprites:
+        for group in self.matrix.sprites:
             if pygame.sprite.groupcollide(group, self, False, False):
                 return True
         # Test collisions with boundaries
-        zone = self.zone.get_rect()
+        matrix = self.matrix.get_rect()
         bottom = max(sprite.rect.bottom for sprite in self.sprites())
-        if bottom > zone.bottom:
+        if bottom > matrix.bottom:
             self.colliding = 'bottom'
             return True
         left = min(sprite.rect.left for sprite in self.sprites())
-        if left < zone.left:
+        if left < matrix.left:
             self.colliding = 'left'
             return True
         right = max(sprite.rect.right for sprite in self.sprites())
-        if right > zone.right:
+        if right > matrix.right:
             self.colliding = 'right'
             return True
         self.colliding = None
@@ -201,8 +201,8 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
             self.moveUp()
         groupwidth = max(sprite.rect.right for sprite
                          in self.sprites()) / self.size
-        zonecenter = (width / self.size) / 2
-        start = zonecenter - int(math.ceil(float(groupwidth) / 2))
+        matrixcenter = (width / self.size) / 2
+        start = matrixcenter - int(math.ceil(float(groupwidth) / 2))
         for sprite in self.sprites():
             sprite.rect.left += (start * self.size)
             sprite.rect.top += height
