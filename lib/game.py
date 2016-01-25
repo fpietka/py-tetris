@@ -293,39 +293,19 @@ class Game():
         tetrimino = self.tetrimino
         if key == self.config['KEY_LEFT']:
             tetrimino.moveLeft()
-            if tetrimino.isColliding():
-                tetrimino.moveRight()
-            else:
-                tetrimino.clear(self.matrix)
-                tetrimino.draw(self.matrix)
         if key == self.config['KEY_RIGHT']:
             tetrimino.moveRight()
-            if tetrimino.isColliding():
-                tetrimino.moveLeft()
-            else:
-                tetrimino.clear(self.matrix)
-                tetrimino.draw(self.matrix)
         if key == self.config['KEY_DOWN']:
-            tetrimino.moveDown()
-            if tetrimino.isColliding():
-                tetrimino.moveUp()
-            else:
+            moved = tetrimino.moveDown()
+            if moved:
                 self.softdrops += 1
-                tetrimino.clear(self.matrix)
-                tetrimino.draw(self.matrix)
         if key in self.config['KEY_ROTATE_RIGHT']:
             if tetrimino.rotate():
                 sounds["rotate"].play()
                 tetrimino.clear(self.matrix)
                 tetrimino.draw(self.matrix)
         if key == self.config['KEY_HARD_DROP']:
-            while not tetrimino.isColliding():
-                self.harddrops += 1
-                tetrimino.moveDown()
-            tetrimino.moveUp()
-            self.harddrops -= 1
-            tetrimino.clear(self.matrix)
-            tetrimino.draw(self.matrix)
+            self.harddrops += tetrimino.harddrop()
 
     def handleKey(self, key):
         if key in (pygame.K_ESCAPE, pygame.K_q):
@@ -341,12 +321,8 @@ class Game():
     def handleFall(self):
         tetrimino = self.tetrimino
         tetrimino.moveDown()
-        if tetrimino.isColliding():
+        if tetrimino.isLocked:
             sounds["fall"].play()
-            tetrimino.moveUp()
-            if tetrimino.isColliding():
-                self.running = False
-                return
             self.matrix.sprites.append(tetrimino)
             # current from previous next
             tetrimino = Tetrimino(

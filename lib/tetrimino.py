@@ -24,6 +24,7 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         self.setBlocks(next(self.blocks_cycle))
         self.background = background
         self.zone = zone
+        self.isLocked = False
 
     def setName(self, name):
         self.name = name
@@ -72,15 +73,30 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         return self
 
     def moveDown(self):
+        moved = False
         self._move('down')
-        return self
+        if self.isColliding():
+            self._move('up')
+            self.isLocked = True
+        else:
+            moved = True
+            self._redraw()
+        return moved
 
     def moveLeft(self):
         self._move('left')
+        if self.isColliding():
+            self._move('right')
+        else:
+            self._redraw()
         return self
 
     def moveRight(self):
         self._move('right')
+        if self.isColliding():
+            self._move('left')
+        else:
+            self._redraw()
         return self
 
     def _move(self, direction):
@@ -96,6 +112,21 @@ class Tetrimino(pygame.sprite.OrderedUpdates):
         elif direction == 'right':
             for sprite in self.sprites():
                 sprite.rect.left += self.size
+
+    def harddrop(self):
+        harddrops = 0
+        while not self.isColliding():
+            self._move('down')
+            harddrops += 1
+        self._move('up')
+        self._redraw()
+        self.isLocked = True
+        harddrops -= 1
+        return harddrops
+
+    def _redraw(self):
+        self.clear(self.matrix)
+        self.draw(self.matrix)
 
     def rotate(self, test_collision=True):
         # previous set of blocks base positions
