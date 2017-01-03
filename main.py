@@ -13,7 +13,7 @@ pygame.mouse.set_visible(False)
 
 # Init config
 config = {}
-execfile("controls.conf", config)
+exec(open("controls.conf").read(), config)
 
 modes = pygame.display.list_modes()
 mode = modes[-1]
