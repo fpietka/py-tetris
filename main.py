@@ -284,6 +284,7 @@ while running:
             if event.key in (pygame.K_ESCAPE, pygame.K_q):
                 running = False
             if event.key == pygame.K_p:
+                game_matrix = matrix
                 if PAUSE:
                     pygame.time.set_timer(PAUSEEVENT, 0)
                     matrix = game_matrix
@@ -292,7 +293,6 @@ while running:
                     pygame.time.set_timer(PAUSEEVENT, 1000)
                     PAUSE = True
 
-                    game_matrix = matrix
                     unpaused_matrix = matrix.copy()
                     paused_matrix = matrix.copy()
 
