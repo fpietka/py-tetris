@@ -241,7 +241,10 @@ tetriminos_definitions = (
 )
 
 
-tetrimino = Tetrimino(random.choice(tetriminos_definitions), B_SIZE, background, matrix)
+tetrimino = Tetrimino(random.choice(tetriminos_definitions),
+                      B_SIZE,
+                      background,
+                      matrix)
 tetrimino.center(Z_WIDTH)
 tetrimino.draw(matrix)
 screen.blit(matrix, (Z_LEFT, 0))
@@ -293,7 +296,9 @@ while running:
                     unpaused_matrix = matrix.copy()
                     paused_matrix = matrix.copy()
 
-                    paused_matrix.blit(pause_label, ((Z_WIDTH / 2) - (pause_font_size[0] / 2), (Z_HEIGHT / 2) - pause_font_size[1]))
+                    paused_matrix.blit(pause_label,
+                                       (Z_WIDTH / 2 - pause_font_size[0] / 2,
+                                        Z_HEIGHT / 2 - pause_font_size[1]))
                     pause_matrix = cycle((paused_matrix, unpaused_matrix))
 
                     matrix = pause_matrix.next()
@@ -359,7 +364,8 @@ while running:
                 )
                 tetrimino.center(Z_WIDTH)
                 # random next
-                next_tetrimino.clear(pygame.Surface((SCREEN_WIDTH - Z_WIDTH, SCREEN_HEIGHT)))
+                next_tetrimino.clear(pygame.Surface((SCREEN_WIDTH - Z_WIDTH,
+                                                     SCREEN_HEIGHT)))
                 next_tetrimino.clear(screen)
                 next_random = random.choice(tetriminos_definitions)
                 next_tetrimino = Tetrimino(
@@ -391,9 +397,15 @@ while running:
 
                     pygame.time.set_timer(FALLEVENT, SPEEDS[level])
 
-                level_label = myfont.render("Level: {}".format(level), False, white)
-                score_label = myfont.render("Score: {}".format(score), False, white)
-                line_label = myfont.render("Lines: {}".format(lines), False, white)
+                level_label = myfont.render("Level: {}".format(level),
+                                            False,
+                                            white)
+                score_label = myfont.render("Score: {}".format(score),
+                                            False,
+                                            white)
+                line_label = myfont.render("Lines: {}".format(lines),
+                                           False,
+                                           white)
 
                 # reset score zone
                 rect = pygame.Rect(SCREEN_WIDTH - 180, 0, SCREEN_WIDTH, 200)
